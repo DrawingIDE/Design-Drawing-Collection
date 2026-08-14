@@ -155,6 +155,25 @@
   .index-card-icon svg { width: 18px; height: 18px; opacity: 0.25; }
   .index-card-name { font-weight: 700; font-size: 13px; line-height: 1.2; }
   .index-card-count { font-size: 11px; color: var(--ink-light); margin-top: 2px; }
+
+  /* ERAS INDEX — stacked rows, newest first */
+  .era-list { display: flex; flex-direction: column; gap: 14px; }
+  .era-index-row { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; display: flex; align-items: center; gap: 1.5rem; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; }
+  .era-index-row:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,24,20,0.06); border-color: #C0B8B0; }
+  .era-index-img-wrap { width: 180px; height: 180px; flex-shrink: 0; border-radius: 6px; overflow: hidden; background: var(--cream); }
+  .era-index-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .era-index-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .era-index-img-placeholder svg { width: 40px; height: 40px; opacity: 0.2; }
+  .era-index-info { flex: 1; min-width: 0; }
+  .era-index-name { font-weight: 800; font-size: 22px; margin-bottom: 4px; }
+  .era-index-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .era-index-dates { font-weight: 700; font-size: 13px; color: var(--accent); }
+  .era-index-count { font-size: 12px; color: var(--ink-light); }
+  .era-index-desc { font-size: 13px; line-height: 1.6; color: var(--ink-mid); max-width: 640px; }
+  @media (max-width: 620px) {
+    .era-index-row { flex-direction: column; align-items: flex-start; }
+    .era-index-img-wrap { width: 100%; height: 160px; }
+  }
   .page-title { font-weight: 800; font-size: 28px; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--ink); text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* TOPICS PAGE */
@@ -365,7 +384,7 @@
   <!-- ERAS INDEX -->
   <div id="view-eras" style="display:none">
     <div class="page-title">Eras</div>
-    <div id="eras-grid" class="index-grid"></div>
+    <div id="eras-grid" class="era-list"></div>
   </div>
 
   <!-- TOPICS PAGE -->
@@ -702,25 +721,47 @@ function renderCategory(type, name) {
 }
 
 function renderIndex(type) {
-  const keyMap = {brands:'Brand',designers:'Designer',eras:'Era'};
+  if (type === 'eras') { renderErasIndex(); return; }
+  const keyMap = {brands:'Brand',designers:'Designer'};
   const key = keyMap[type];
   const names = unique(key);
-  const metaObj = type==='brands'?metadata.brands:type==='designers'?metadata.designers:metadata.eras;
-  const ph = type==='brands'?BRAND_SVG:type==='designers'?PERSON_SVG:ERA_SVG;
+  const metaObj = type==='brands'?metadata.brands:metadata.designers;
+  const ph = type==='brands'?BRAND_SVG:PERSON_SVG;
   const catType = type.slice(0,-1);
   const grid = document.getElementById(type+'-grid');
-  const filteredNames = type==='eras' ? names.filter(n=>ERA_DATES[n]) : names;
-  grid.innerHTML = filteredNames.map(name => {
+  grid.innerHTML = names.map(name => {
     const count = allProducts.filter(p=>p[key]===name).length;
     const info = metaObj[name]||{};
     const iconHTML = info.image?`<img src="${safeAttr(info.image)}" alt="${safeAttr(name)}" onerror="this.style.display='none'">`:`${ph}`;
-    const dates = type==='eras'?ERA_DATES[name]:'';
     return `<div class="index-card" onclick="navigate('category','${catType}','${safeJS(name)}')">
       <div class="index-card-icon">${iconHTML}</div>
       <div>
         <div class="index-card-name">${name}</div>
-        ${dates?`<div style="font-size:10px;color:var(--accent);font-weight:600;margin-top:1px">${dates}</div>`:''}
         <div class="index-card-count">${count} object${count!==1?'s':''}</div>
+      </div>
+    </div>`;
+  }).join('') || '<div class="no-results">No entries found</div>';
+}
+
+function renderErasIndex() {
+  const grid = document.getElementById('eras-grid');
+  const names = ERA_ORDER.filter(n => ERA_DATES[n]);
+  grid.innerHTML = names.map(name => {
+    const count = allProducts.filter(p=>p['Era']===name).length;
+    const info = metadata.eras[name]||{};
+    const dates = ERA_DATES[name]||'';
+    const imgHTML = info.image
+      ? `<img src="${safeAttr(info.image)}" alt="${safeAttr(name)}" onerror="this.style.display='none'">`
+      : `<div class="era-index-img-placeholder">${ERA_SVG}</div>`;
+    return `<div class="era-index-row" onclick="navigate('category','era','${safeJS(name)}')">
+      <div class="era-index-img-wrap">${imgHTML}</div>
+      <div class="era-index-info">
+        <div class="era-index-name">${name}</div>
+        <div class="era-index-meta">
+          ${dates?`<span class="era-index-dates">${dates}</span>`:''}
+          <span class="era-index-count">${count} object${count!==1?'s':''}</span>
+        </div>
+        ${info.description?`<p class="era-index-desc">${info.description}</p>`:''}
       </div>
     </div>`;
   }).join('') || '<div class="no-results">No entries found</div>';
@@ -853,6 +894,7 @@ const ERA_DATES = {
   'Postmodern':         '1990 – 1999',
   'Digital Era':        '2000 – present',
 };
+const ERA_ORDER = ['Digital Era', 'Postmodern', 'Late Modern', 'Mid-Century Modern', 'Pre-1950'];
 
 const hdr = document.querySelector('header');
 window.addEventListener('scroll', () => {
