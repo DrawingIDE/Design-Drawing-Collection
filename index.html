@@ -685,7 +685,8 @@ function renderCategory(type, name) {
   let headerHTML = '';
   if (type==='era') {
     const dates = ERA_DATES[name]||'';
-    headerHTML = `<div class="era-header"><div class="era-name">${name}</div>${dates?`<div class="era-dates">${dates}</div>`:''}</div>
+    const eraImgHTML = info.image?`<img class="category-image" src="${safeAttr(info.image)}" alt="${safeAttr(name)}" onerror="this.style.display='none'">`:`<div class="category-image-placeholder">${ERA_SVG}</div>`;
+    headerHTML = `${eraImgHTML}<div class="era-header"><div class="era-name">${name}</div>${dates?`<div class="era-dates">${dates}</div>`:''}</div>
       ${info.description?`<p class="category-desc">${info.description}</p>`:`<p class="category-no-desc">No description yet — add one in eras.json</p>`}`;
   } else {
     const ph = type==='designer'?PERSON_SVG:BRAND_SVG;
