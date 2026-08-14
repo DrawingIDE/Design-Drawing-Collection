@@ -427,9 +427,9 @@ async function loadData() {
     const res = await fetch('products.csv?v=' + Date.now());
     allProducts = parseCSV(await res.text());
     await Promise.allSettled([
-      fetch('brands.json').then(r=>r.ok?r.json():{}).then(d=>{metadata.brands=d||{};}),
-      fetch('designers.json').then(r=>r.ok?r.json():{}).then(d=>{metadata.designers=d||{};}),
-      fetch('eras.json').then(r=>r.ok?r.json():{}).then(d=>{metadata.eras=d||{};}),
+      fetch('info/brands.json').then(r=>r.ok?r.json():{}).then(d=>{metadata.brands=d||{};}),
+      fetch('info/designers.json').then(r=>r.ok?r.json():{}).then(d=>{metadata.designers=d||{};}),
+      fetch('info/eras.json').then(r=>r.ok?r.json():{}).then(d=>{metadata.eras=d||{};}),
     ]);
     buildFilters();
     document.getElementById('header-count').textContent = allProducts.length + ' objects';
