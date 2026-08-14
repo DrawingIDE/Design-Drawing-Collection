@@ -421,20 +421,33 @@ function safeAttr(s) { return (s||'').replace(/&/g,'&amp;').replace(/'/g,'&#39;'
 function safeJS(s) { return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 
 function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  const sep = lines[0].includes(';') ? ';' : ',';
-  const headers = lines[0].split(sep).map(h => h.trim().replace(/^"|"$/g,''));
-  return lines.slice(1).map(line => {
-    const vals = []; let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const c = line[i];
-      if (c === '"') { inQ = !inQ; }
-      else if (c === sep && !inQ) { vals.push(cur.trim()); cur = ''; }
-      else cur += c;
+  // Scans character-by-character instead of splitting on '\n' first, so a
+  // quoted field that itself contains a line break (a multi-line Excel cell)
+  // or a delimiter isn't mistaken for a row boundary.
+  const sep = text.slice(0, text.search(/[\r\n]/)).includes(';') ? ';' : ',';
+  const rows = [];
+  let row = [], field = '', inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') {
+        if (text[i+1] === '"') { field += '"'; i++; }  // escaped "" -> literal "
+        else { inQ = false; }
+      } else field += c;
+    } else {
+      if (c === '"') inQ = true;
+      else if (c === sep) { row.push(field); field = ''; }
+      else if (c === '\r') { /* ignore, \n below ends the row */ }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+      else field += c;
     }
-    vals.push(cur.trim());
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+
+  const headers = rows[0].map(h => h.trim());
+  return rows.slice(1).map(vals => {
     const obj = {};
-    headers.forEach((h,i) => obj[h] = (vals[i]||'').replace(/^"|"$/g,'').trim());
+    headers.forEach((h,i) => obj[h] = (vals[i]||'').trim().replace(/"/g, ''));
     if (!obj['Photo'] || !obj['Photo'].match(/\.(jpg|jpeg|png|webp|gif)$/i))
       obj['Photo'] = obj['ObjectID'] ? 'photos/' + obj['ObjectID'] + '.jpeg' : '';
     return obj;
