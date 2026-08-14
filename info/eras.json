@@ -1,11 +1,22 @@
 {
-  "Late Modern": {
-    "description": "The Late Modern era (roughly 1960s–1990s) saw industrial design mature as a profession. Mass production became more sophisticated, plastics and electronics enabled entirely new product categories, and designers like Dieter Rams, Ettore Sottsass, and Philippe Starck pushed the boundaries of form and function. This period also saw the rise of corporate design identity and the first wave of consumer electronics."
-  },
-  "Early Modern": {
+  "Pre-1950": {
+    "image": "photos/eras/Pre-1950.jpeg",
     "description": "The Early Modern period (roughly 1900s–1940s) was defined by the Machine Age — a belief that industrial production and rational design could improve everyday life. Movements such as the Bauhaus, De Stijl, and Art Deco shaped the visual language of products, furniture, and architecture. Functionality and geometric abstraction replaced ornament as the dominant aesthetic values."
   },
+  "Mid-Century Modern": {
+    "image": "photos/eras/Mid-Century_Modern.jpeg",
+    "description": "The Mid-Century Modern era (roughly 1950s–1960s) marked the boom years of post-war consumer culture. Designers such as Charles and Ray Eames, George Nelson, and Raymond Loewy championed clean, ergonomic forms suited to mass production. Bold primary colours, moulded plywood and plastics, and a new optimism about domestic technology defined the objects of this period."
+  },
+  "Late Modern": {
+    "image": "photos/eras/Late_Modern.jpeg",
+    "description": "The Late Modern era (roughly 1960s–1990s) saw industrial design mature as a profession. Mass production became more sophisticated, plastics and electronics enabled entirely new product categories, and designers like Dieter Rams, Ettore Sottsass, and Philippe Starck pushed the boundaries of form and function. This period also saw the rise of corporate design identity and the first wave of consumer electronics."
+  },
   "Postmodern": {
+    "image": "photos/eras/Postmodern.jpeg",
     "description": "Postmodern design (roughly 1980s–2000s) rejected the austerity of Modernism in favour of irony, colour, and historical reference. The Memphis Group, founded by Ettore Sottsass in Milan in 1981, became its defining movement — producing furniture and objects that were playful, provocative, and deliberately anti-functional in spirit."
+  },
+  "Digital Era": {
+    "image": "photos/eras/Digital_Era.jpeg",
+    "description": "The Digital Era (2000–present) reflects the shift from mechanical and electro-mechanical products to software-driven, connected devices. Physical interfaces have given way to touchscreens and minimal, integrated housings. Apple's industrial design language, led by Jony Ive, became particularly influential in shaping the visual vocabulary of consumer electronics during this period."
   }
 }
