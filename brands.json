@@ -1,0 +1,14 @@
+{
+  "Philips": {
+    "image": "images/brands/philips.png",
+    "description": "Philips is a Dutch multinational founded in Eindhoven in 1891. Originally a light bulb manufacturer, the company became one of the world's largest electronics corporations, known for iconic consumer products ranging from radios and shavers to medical equipment."
+  },
+  "Braun": {
+    "image": "images/brands/braun.png",
+    "description": "Braun GmbH is a German consumer products company founded in 1921. Under the creative direction of Dieter Rams from the 1960s onward, Braun became synonymous with the principle of 'less but better' — producing some of the most influential industrial design of the 20th century."
+  },
+  "Rolodex": {
+    "image": "",
+    "description": ""
+  }
+}

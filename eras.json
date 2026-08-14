@@ -1,0 +1,11 @@
+{
+  "Late Modern": {
+    "description": "The Late Modern era (roughly 1960s–1990s) saw industrial design mature as a profession. Mass production became more sophisticated, plastics and electronics enabled entirely new product categories, and designers like Dieter Rams, Ettore Sottsass, and Philippe Starck pushed the boundaries of form and function. This period also saw the rise of corporate design identity and the first wave of consumer electronics."
+  },
+  "Early Modern": {
+    "description": "The Early Modern period (roughly 1900s–1940s) was defined by the Machine Age — a belief that industrial production and rational design could improve everyday life. Movements such as the Bauhaus, De Stijl, and Art Deco shaped the visual language of products, furniture, and architecture. Functionality and geometric abstraction replaced ornament as the dominant aesthetic values."
+  },
+  "Postmodern": {
+    "description": "Postmodern design (roughly 1980s–2000s) rejected the austerity of Modernism in favour of irony, colour, and historical reference. The Memphis Group, founded by Ettore Sottsass in Milan in 1981, became its defining movement — producing furniture and objects that were playful, provocative, and deliberately anti-functional in spirit."
+  }
+}
