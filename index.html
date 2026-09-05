@@ -22,9 +22,9 @@
   .header-brand { display: flex; align-items: baseline; cursor: pointer; flex: 1; }
   .header-brand .title { font-weight: 700; font-size: 32px; color: var(--white); letter-spacing: -0.6px; }
   .title-sep { display: inline; }
-  .header-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+  .header-right { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
   .header-meta { font-size: 13px; color: #5A5550; letter-spacing: 0.5px; white-space: nowrap; }
-  .header-meta .sep { margin: 0 5px; }
+  .header-meta .sep { margin: 0 8px; }
   .header-about-btn { font-size: 11px; color: #7A7570; letter-spacing: 0.5px; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.15s; white-space: nowrap; }
   .header-about-btn:hover { color: #B0A8A0; }
   .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
@@ -87,7 +87,7 @@
   /* INTRO BANNER */
   .intro-banner { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
   .intro-banner p { font-size: 14px; line-height: 1.7; color: var(--ink-mid); }
-  .intro-banner a { color: var(--ink); font-weight: 600; text-decoration: underline; cursor: pointer; }
+  .intro-banner a { color: var(--accent); font-weight: 600; text-decoration: none; cursor: pointer; }
 
   /* GRID */
   .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
@@ -311,7 +311,7 @@
     </div>
     <div class="header-right">
       <span class="header-meta">IDE · TU Delft <img src="assets/tudelft_logo.png" alt="TU Delft" style="height:22px;vertical-align:middle;margin:0 12px;opacity:0.8"> <span id="header-count">—</span></span>
-      <span class="header-meta" style="color:#5A5550">·</span>
+      <span class="header-meta" style="color:#5A5550; margin: 0 2px;">·</span>
       <button class="header-about-btn" onclick="openAbout()">About</button>
     </div>
   </div>
