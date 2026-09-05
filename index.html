@@ -55,7 +55,7 @@
     .title-sep { display: none; }
     .title-line { display: block; }
     .header-right { flex-direction: row; align-items: center; gap: 6px; }
-    .header-meta { font-size: 11px; letter-spacing: 0.3px; }
+    .header-meta { font-size: 13px; letter-spacing: 0.3px; }
     .header-about-btn { display: none; }
     .header-inner { padding: 0 1rem; }
     .header-nav { padding: 0; height: 38px; }
@@ -65,6 +65,7 @@
     .detail-name { font-size: 24px; }
     .category-title { font-size: 28px; }
     .header-top { transition: height 0.2s ease, opacity 0.2s ease; }
+    .header-meta-text { display: none; }
   }
 
   }
@@ -324,7 +325,7 @@
       <span class="title"><span class="title-line">Design</span><span class="title-sep"> </span><span class="title-line">Drawing</span><span class="title-sep"> </span><span class="title-line">Collection</span></span>
     </div>
     <div class="header-right">
-      <span class="header-meta"><img src="assets/tudelft_logo.png" alt="TU Delft" style="height:20px;vertical-align:middle;margin-right:8px;opacity:0.8"><span id="header-count">—</span></span>
+      <span class="header-meta"><span class="header-meta-text">IDE <span class="sep">·</span> TU Delft </span><img src="assets/tudelft_logo.png" alt="TU Delft" style="height:20px;vertical-align:middle;margin-right:8px;opacity:0.8"><span id="header-count">—</span></span>
       <button class="header-about-btn" onclick="openAbout()">About</button>
     </div>
   </div>
