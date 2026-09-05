@@ -36,7 +36,7 @@
   .nav-link { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: #7A7570; text-transform: uppercase; padding: 0 14px; display: flex; align-items: center; cursor: pointer; border-radius: 0; transition: color 0.15s, background 0.15s; white-space: nowrap; flex-shrink: 0; }
   .nav-link:hover { color: var(--white); background: rgba(255,255,255,0.07); }
   .nav-link.active { color: var(--white); background: var(--accent); }
-  header.scrolled .header-top { height: 0 !important; opacity: 0; pointer-events: none; padding-top: 0; padding-bottom: 0; }
+  header.scrolled .header-top { height: 0 !important; opacity: 0; pointer-events: none; padding-top: 0; padding-bottom: 0; overflow: hidden; }
 
   /* LAYOUT */
   .page-wrap { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
@@ -50,18 +50,20 @@
     .topics-filter-row { gap: 6px; }
     .topic-def-grid { grid-template-columns: 1fr; }
     .page-wrap { padding: 1.5rem 1rem 3rem; }
-    .header-top { padding: 0 1rem; height: auto; min-height: 72px; padding-top: 10px; padding-bottom: 10px; }
-    .header-brand .title { font-size: 20px; line-height: 1.05; letter-spacing: -0.4px; }
+    .header-top { padding: 0 1rem; height: auto; min-height: 56px; padding-top: 8px; padding-bottom: 8px; }
+    .header-brand .title { font-size: 22px; line-height: 1.05; letter-spacing: -0.4px; }
     .title-sep { display: none; }
     .title-line { display: block; }
-    .header-right { flex-direction: column; align-items: flex-end; gap: 2px; }
-    .header-meta, .header-about-btn { font-size: 10px; }
-    .header-nav { padding: 0; height: 34px; }
-    .nav-link { padding: 0 10px; font-size: 10px; letter-spacing: 0.4px; }
-    footer { padding: 1.25rem 1rem; }
-    .header-meta { font-size: 9px; letter-spacing: 0.3px; }
+    .header-right { flex-direction: row; align-items: center; gap: 6px; }
+    .header-meta { font-size: 11px; letter-spacing: 0.3px; }
     .header-about-btn { display: none; }
     .header-inner { padding: 0; }
+    .header-nav { padding: 0; height: 38px; }
+    .nav-link { padding: 0; font-size: 11px; letter-spacing: 0.4px; flex: 1; justify-content: center; }
+    footer { padding: 1.25rem 1rem; }
+    .detail-name { font-size: 24px; }
+    .category-title { font-size: 28px; }
+    .header-top { transition: height 0.2s ease, opacity 0.2s ease; }
   }
 
   }
