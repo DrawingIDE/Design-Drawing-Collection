@@ -943,8 +943,8 @@ const ERA_ORDER = ['Digital Era', 'Postmodern', 'Late Modern', 'Mid-Century Mode
 const hdr = document.querySelector('header');
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
-  if (y > 80) hdr.classList.add('scrolled');
-  else if (y < 20) hdr.classList.remove('scrolled');
+  if (y > 120) hdr.classList.add('scrolled');
+  else if (y < 60) hdr.classList.remove('scrolled');
 }, { passive: true });
 
 const TOPIC_ORDER = Object.keys(DRAWING_TOPICS);
