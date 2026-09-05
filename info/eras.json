@@ -1,19 +1,19 @@
 {
   "Pre-1950": {
     "image": "photos/eras/Pre-1950.jpeg",
-    "description": "The Early Modern period (roughly 1900s–1940s) was defined by the Machine Age — a belief that industrial production and rational design could improve everyday life. Movements such as the Bauhaus, De Stijl, and Art Deco shaped the visual language of products, furniture, and architecture. Functionality and geometric abstraction replaced ornament as the dominant aesthetic values."
+    "description": "The Early Modern period (before 1950) was defined by the Machine Age — a belief that industrial production and rational design could improve everyday life. Movements such as the Bauhaus, De Stijl, and Art Deco shaped the visual language of products, furniture, and architecture. Functionality and geometric abstraction replaced ornament as the dominant aesthetic values."
   },
   "Mid-Century Modern": {
     "image": "photos/eras/Mid-Century_Modern.jpeg",
-    "description": "The Mid-Century Modern era (roughly 1950s–1960s) marked the boom years of post-war consumer culture. Designers such as Charles and Ray Eames, George Nelson, and Raymond Loewy championed clean, ergonomic forms suited to mass production. Bold primary colours, moulded plywood and plastics, and a new optimism about domestic technology defined the objects of this period."
+    "description": "The Mid-Century Modern era (1950–1970) marked the boom years of post-war consumer culture. Designers such as Charles and Ray Eames, George Nelson, and Raymond Loewy championed clean, ergonomic forms suited to mass production. Bold primary colours, moulded plywood and plastics, and a new optimism about domestic technology defined the objects of this period."
   },
   "Late Modern": {
     "image": "photos/eras/Late_Modern.jpeg",
-    "description": "The Late Modern era (roughly 1960s–1990s) saw industrial design mature as a profession. Mass production became more sophisticated, plastics and electronics enabled entirely new product categories, and designers like Dieter Rams, Ettore Sottsass, and Philippe Starck pushed the boundaries of form and function. This period also saw the rise of corporate design identity and the first wave of consumer electronics."
+    "description": "The Late Modern era (1970–1985) saw industrial design mature as a profession. Dieter Rams at Braun and the broader functionalist tradition defined a rigorous, system-based approach to product design. Plastics and consumer electronics enabled entirely new product categories, and corporate design identity became a strategic priority for manufacturers across Europe, Japan, and the United States."
   },
   "Postmodern": {
     "image": "photos/eras/Postmodern.jpeg",
-    "description": "Postmodern design (roughly 1980s–2000s) rejected the austerity of Modernism in favour of irony, colour, and historical reference. The Memphis Group, founded by Ettore Sottsass in Milan in 1981, became its defining movement — producing furniture and objects that were playful, provocative, and deliberately anti-functional in spirit."
+    "description": "Postmodern design (1985–2000) rejected the austerity of Modernism in favour of irony, colour, and historical reference. The Memphis Group, founded by Ettore Sottsass in Milan in 1981, became its defining movement — producing furniture and objects that were playful, provocative, and deliberately anti-functional in spirit. Philippe Starck brought a similar sensibility to mainstream consumer products throughout the late 1980s and 1990s."
   },
   "Digital Era": {
     "image": "photos/eras/Digital.jpeg",
