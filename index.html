@@ -59,6 +59,10 @@
     .header-nav { padding: 0; height: 34px; }
     .nav-link { padding: 0 10px; font-size: 10px; letter-spacing: 0.4px; }
     footer { padding: 1.25rem 1rem; }
+    .header-meta { font-size: 9px; letter-spacing: 0.3px; }
+    .header-about-btn { display: none; }
+    .header-inner { padding: 0; }
+  }
 
   }
   @media (min-width: 621px) and (max-width: 820px) {
@@ -317,7 +321,7 @@
       <span class="title"><span class="title-line">Design</span><span class="title-sep"> </span><span class="title-line">Drawing</span><span class="title-sep"> </span><span class="title-line">Collection</span></span>
     </div>
     <div class="header-right">
-      <span class="header-meta">IDE <span class="sep">·</span> TU Delft <img src="assets/tudelft_logo.png" alt="TU Delft" style="height:22px;vertical-align:middle;margin:0 10px;opacity:0.8"><span id="header-count">—</span> <span class="sep">·</span> </span>
+      <span class="header-meta">IDE <span class="sep">·</span> TU Delft <img src="assets/tudelft_logo.png" alt="TU Delft" style="height:18px;vertical-align:middle;margin:0 6px;opacity:0.8"><span id="header-count">—</span></span>
       <button class="header-about-btn" onclick="openAbout()">About</button>
     </div>
   </div>
@@ -418,7 +422,7 @@
   <!-- TOPICS PAGE -->
   <div id="view-topics" style="display:none">
     <div class="page-title">Drawing Topics</div>
-    <p class="topics-intro">Browse the collection by drawing technique. Each product has been tagged based on its geometric and material properties. Select one or more topics to find matching objects. For more information on Delft Design Drawing, visit <a href="http://www.delftdesigndrawing.com/" target="_blank" style="color:var(--ink);text-decoration:none;font-weight:700;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink)'">www.delftdesigndrawing.com</a>
+    <p class="topics-intro">Browse the collection by drawing technique. Each product has been tagged based on its geometric and material properties. Select one or more topics to find matching objects. For more information on Delft Design Drawing,     visit <a href="http://www.delftdesigndrawing.com/" target="_blank" style="color:var(--ink);text-decoration:none;font-weight:700;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink)'">www.delftdesigndrawing.com</a>.</p>
     <div id="topic-toggles"></div>
     <div class="topics-results-info" id="topics-results-info"></div>
     <div id="topics-grid" class="product-grid"></div>
