@@ -18,7 +18,7 @@
 
   /* HEADER */
   header { background: var(--ink); color: var(--white); position: sticky; top: 0; z-index: 100; }
-  .header-top { padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 1px solid rgba(255,255,255,0.07); transition: height 0.28s ease, opacity 0.28s ease, padding 0.28s ease; overflow: hidden; max-width: 1280px; margin-left: auto; margin-right: auto; }
+  .header-top { padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 80px; transition: height 0.28s ease, opacity 0.28s ease, padding 0.28s ease; overflow: hidden; max-width: 1280px; margin-left: auto; margin-right: auto; }
   .header-brand { display: flex; align-items: baseline; cursor: pointer; flex: 1; }
   .header-brand .title { font-weight: 700; font-size: 32px; color: var(--white); letter-spacing: -0.6px; }
   .title-sep { display: inline; }
@@ -37,7 +37,7 @@
   header.scrolled .header-top { height: 0 !important; opacity: 0; pointer-events: none; padding-top: 0; padding-bottom: 0; }
 
   /* LAYOUT */
-  .page-wrap { max-width: 1280px; margin: 0 auto; padding: 2rem 2.5rem 4rem; }
+  .page-wrap { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
   @media (max-width: 620px) {
     .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -308,7 +308,7 @@
       <span class="title"><span class="title-line">Design</span><span class="title-sep"> </span><span class="title-line">Drawing</span><span class="title-sep"> </span><span class="title-line">Collection</span></span>
     </div>
     <div class="header-right">
-      <span class="header-meta">IDE · TU Delft<span class="sep">·</span><span id="header-count">—</span></span>
+      <span class="header-meta">IDE · TU Delft<span class="sep">·</span><img src="assets/tudelft-logo.svg" alt="TU Delft" style="height:18px;vertical-align:middle;margin:0 6px;opacity:0.5"><span class="sep">·</span><span id="header-count">—</span></span>
       <button class="header-about-btn" onclick="openAbout()">About</button>
     </div>
   </div>
