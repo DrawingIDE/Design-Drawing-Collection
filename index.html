@@ -42,6 +42,9 @@
   .page-wrap { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
   @media (max-width: 620px) {
+    .filter-wrap { display: none; }
+    #f-sort { display: none; }
+    .search-wrap { min-width: unset; }
     .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .topic-toggle { font-size: 11px; padding: 6px 10px; }
     .topics-filter-row { gap: 6px; }
@@ -56,6 +59,7 @@
     .header-nav { padding: 0; height: 34px; }
     .nav-link { padding: 0 10px; font-size: 10px; letter-spacing: 0.4px; }
     footer { padding: 1.25rem 1rem; }
+
   }
   @media (min-width: 621px) and (max-width: 820px) {
     .page-wrap { padding: 1.5rem 1.25rem 3rem; }
@@ -357,7 +361,7 @@
         <button class="filter-clear-x" onclick="clearOne('country')" title="Clear">✕</button>
       </div>
       <select class="filter-select" id="f-sort" onchange="renderGrid()" style="border-color:var(--border);min-width:130px">
-        <option value="views">Most viewed</option>
+        <option value="random">Random</option>
         <option value="name">Name A–Z</option>
         <option value="id">Object ID</option>
         <option value="year-asc">Year: oldest first</option>
@@ -632,9 +636,9 @@ function getViews(id) {
 }
 
 function getSortedProducts(products) {
-  const sort = document.getElementById('f-sort') ? document.getElementById('f-sort').value : 'views';
+  const sort = document.getElementById('f-sort') ? document.getElementById('f-sort').value : 'random';
   const arr = [...products];
-  if (sort === 'views') return arr.sort((a,b) => getViews(b['ObjectID']) - getViews(a['ObjectID']));
+  if (sort === 'random') return arr.sort(() => Math.random() - 0.5);
   if (sort === 'name')  return arr.sort((a,b) => (a['Product (EN)']||'').localeCompare(b['Product (EN)']||''));
   if (sort === 'id')    return arr.sort((a,b) => (a['ObjectID']||'').localeCompare(b['ObjectID']||''));
   if (sort === 'year-asc') return arr.sort((a,b) => { const ya=parseInt(a['Year'])||0,yb=parseInt(b['Year'])||0; if(!ya&&!yb)return 0; if(!ya)return 1; if(!yb)return -1; return ya-yb; });
