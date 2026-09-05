@@ -18,7 +18,7 @@
 
   /* HEADER */
   header { background: var(--ink); color: var(--white); position: sticky; top: 0; z-index: 100; }
-  .header-top { padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 80px; transition: height 0.28s ease, opacity 0.28s ease, padding 0.28s ease; overflow: hidden; max-width: 1280px; margin-left: auto; margin-right: auto; }
+  .header-top { padding: 0; display: flex; align-items: center; justify-content: space-between; height: 80px; transition: height 0.28s ease, opacity 0.28s ease, padding 0.28s ease; overflow: hidden; }
   .header-brand { display: flex; align-items: baseline; cursor: pointer; flex: 1; }
   .header-brand .title { font-weight: 700; font-size: 32px; color: var(--white); letter-spacing: -0.6px; }
   .title-sep { display: inline; }
@@ -27,9 +27,10 @@
   .header-meta .sep { margin: 0 5px; }
   .header-about-btn { font-size: 11px; color: #7A7570; letter-spacing: 0.5px; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.15s; white-space: nowrap; }
   .header-about-btn:hover { color: #B0A8A0; }
+  .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
 
   /* Nav */
-  .header-nav { display: flex; padding: 0 2.5rem; height: 36px; align-items: stretch; gap: 0; overflow-x: auto; scrollbar-width: none; max-width: 1280px; margin-left: auto; margin-right: auto; }
+  .header-nav { display: flex; padding: 0; height: 36px; align-items: stretch; gap: 0; overflow-x: auto; scrollbar-width: none; }
   .header-nav::-webkit-scrollbar { display: none; }
   .nav-link { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: #7A7570; text-transform: uppercase; padding: 0 14px; display: flex; align-items: center; cursor: pointer; border-radius: 0; transition: color 0.15s, background 0.15s; white-space: nowrap; flex-shrink: 0; }
   .nav-link:hover { color: var(--white); background: rgba(255,255,255,0.07); }
@@ -303,12 +304,13 @@
 </div>
 
 <header>
+  <div class="header-inner">
   <div class="header-top">
     <div class="header-brand" onclick="navigate('products')">
       <span class="title"><span class="title-line">Design</span><span class="title-sep"> </span><span class="title-line">Drawing</span><span class="title-sep"> </span><span class="title-line">Collection</span></span>
     </div>
     <div class="header-right">
-      <span class="header-meta">IDE · TU Delft<span class="sep">·</span><img src="assets/tudelft_logo.png" alt="TU Delft" style="height:16px;vertical-align:middle;margin:0 4px;opacity:0.6"><span class="sep">·</span><span id="header-count">—</span></span>
+      <span class="header-meta">IDE · TU Delft <img src="assets/tudelft_logo.png" alt="TU Delft" style="height:22px;vertical-align:middle;margin:0 6px;opacity:0.8"><span id="header-count">—</span><span class="sep">·</span></span>
       <button class="header-about-btn" onclick="openAbout()">About</button>
     </div>
   </div>
@@ -319,7 +321,8 @@
     <span class="nav-link" id="nav-eras" onclick="navigate('eras')">Eras</span>
     <span class="nav-link" id="nav-topics" onclick="navigate('topics')">Topics</span>
     <span class="nav-link" id="nav-drawings" onclick="navigate('drawings')" style="display:none">Drawings</span>
-  </nav>
+    </nav>
+  </div>
 </header>
 
 <div class="page-wrap">
