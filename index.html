@@ -69,8 +69,8 @@
     .header-meta { font-size: 12px; letter-spacing: 0.2px; }
     .header-meta-text { display: none; }
     .header-about-btn { display: none; }
-    .header-nav { display: none; }
-    .hamburger { display: flex; }
+    .header-nav { display: flex; align-items: center; }
+    .hamburger { display: flex; margin-right: 4px; }
     header.scrolled .header-top { height: 0 !important; min-height: 0 !important; opacity: 0; }
     .page-wrap { padding: 1.5rem 1rem 3rem; }
     .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -403,10 +403,10 @@
       <div class="header-right">
         <span class="header-meta"><span class="header-meta-text">IDE <span class="sep">·</span> TU Delft</span><img src="assets/tudelft_logo.png" alt="TU Delft" style="height:20px;vertical-align:middle;margin:0 10px;opacity:0.8"><span id="header-count">—</span><span class="sep header-meta-text">·</span></span>
         <button class="header-about-btn" onclick="openAbout()">About</button>
-        <button class="hamburger" onclick="openMobileNav()" aria-label="Menu">☰</button>
       </div>
     </div>
     <nav class="header-nav">
+      <button class="hamburger" onclick="openMobileNav()" aria-label="Menu">☰</button>
       <span class="nav-link" id="nav-products" onclick="navigate('products')">Products</span>
       <span class="nav-link" id="nav-brands" onclick="navigate('brands')">Brands</span>
       <span class="nav-link" id="nav-designers" onclick="navigate('designers')">Designers</span>
