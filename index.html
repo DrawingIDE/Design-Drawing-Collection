@@ -263,11 +263,14 @@
   .topic-panel-close:hover { background: rgba(0,0,0,0.7); }
   .topic-panel-counter { font-size: 11px; color: var(--ink-light); font-weight: 600; }
   @media (max-width: 680px) {
-    .topic-panel-inner { grid-template-columns: 1fr; grid-template-rows: 55% 45%; height: 92vh; }
+    .topic-panel-inner { grid-template-columns: 1fr; grid-template-rows: 45% 55%; height: 96vh; }
     .topic-panel-img-wrap { height: 100%; }
-    .topic-panel-text { padding: 1.25rem; border-left: none; border-top: 1px solid var(--border); }
-    .topic-panel { padding: 0.5rem; }
-    .topic-panel-name { font-size: 20px; }
+    .topic-panel-img-wrap img { object-fit: cover; }
+    .topic-panel-text { padding: 1rem 1.25rem; border-left: none; border-top: 1px solid var(--border); overflow-y: auto; }
+    .topic-panel { padding: 0.25rem; }
+    .topic-panel-name { font-size: 18px; margin-bottom: 0.5rem; }
+    .topic-panel-desc { font-size: 12px; line-height: 1.6; }
+    .topic-panel-nav { margin-top: 0.75rem; padding-top: 0.75rem; }
   }
 
   /* ABOUT MODAL */
@@ -368,7 +371,7 @@
         <span class="title"><span class="title-line">Design</span><span class="title-sep"> </span><span class="title-line">Drawing</span><span class="title-sep"> </span><span class="title-line">Collection</span></span>
       </div>
       <div class="header-right">
-        <span class="header-meta"><span class="header-meta-text">IDE <span class="sep<img src="assets/tudelft_logo.png" alt="TU Delft" style="height:20px;vertical-align:middle;margin-right:8px;opacity:0.8">·</span> TU Delft </span><span id="header-count">—</span><span class="sep header-meta-text">·</span></span>
+        <span class="header-meta"><span class="header-meta-text">IDE <span class="sep">·</span> TU Delft</span><img src="assets/tudelft_logo.png" alt="TU Delft" style="height:20px;vertical-align:middle;margin:0 10px;opacity:0.8"><span id="header-count">—</span><span class="sep header-meta-text">·</span></span>
         <button class="header-about-btn" onclick="openAbout()">About</button>
         <button class="hamburger" onclick="openMobileNav()" aria-label="Menu">☰</button>
       </div>
