@@ -291,6 +291,12 @@
   .loading-state { text-align: center; padding: 5rem 2rem; color: var(--ink-light); font-size: 14px; grid-column: 1/-1; }
   .no-results { text-align: center; padding: 3rem; color: var(--ink-mid); font-size: 13px; grid-column: 1/-1; }
   footer { border-top: 1px solid var(--border); padding: 1.5rem 2.5rem; text-align: center; font-size: 11px; color: var(--ink-light); background: var(--cream); }
+
+  .index-search-wrap { position: relative; margin-bottom: 1.25rem; max-width: 400px; }
+  .index-search-input { width: 100%; padding: 8px 12px 8px 32px; border: 1px solid var(--border); border-radius: 6px; background: var(--white); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--ink); outline: none; transition: border-color 0.15s; }
+  .index-search-input:focus { border-color: var(--ink-mid); }
+  .index-search-input::placeholder { color: var(--ink-light); }
+  .index-search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-light); pointer-events: none; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -444,6 +450,7 @@
   <div id="view-brands" style="display:none">
     <div class="page-title">Brands</div>
     <p class="topics-intro">Manufacturers and producers represented in the collection. Many objects were made by European industrial brands active between 1950 and 2000.</p>
+    <div class="index-search-wrap"><span class="index-search-icon">⌕</span><input class="index-search-input" id="brands-search" type="text" placeholder="Search brands…" oninput="renderIndex('brands')"></div>
     <div id="brands-grid" class="index-grid"></div>
   </div>
 
@@ -451,6 +458,7 @@
   <div id="view-designers" style="display:none">
     <div class="page-title">Designers</div>
     <p class="topics-intro">Industrial and product designers whose work is represented in the collection. Click a name to browse their objects.</p>
+    <div class="index-search-wrap"><span class="index-search-icon">⌕</span><input class="index-search-input" id="designers-search" type="text" placeholder="Search designers…" oninput="renderIndex('designers')"></div>
     <div id="designers-grid" class="index-grid"></div>
   </div>
 
@@ -818,7 +826,10 @@ function renderIndex(type) {
   if (type === 'eras') { renderErasIndex(); return; }
   const keyMap = {brands:'Brand',designers:'Designer'};
   const key = keyMap[type];
-  const names = unique(key);
+  const searchEl = document.getElementById(type+'-search');
+  const q = searchEl ? searchEl.value.toLowerCase().trim() : '';
+  let names = unique(key);
+  if (q) names = names.filter(n => n.toLowerCase().includes(q));
   const metaObj = type==='brands'?metadata.brands:metadata.designers;
   const ph = type==='brands'?BRAND_SVG:PERSON_SVG;
   const catType = type.slice(0,-1);
