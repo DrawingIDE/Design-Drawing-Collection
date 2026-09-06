@@ -19,7 +19,8 @@
 
   /* HEADER */
   header { background: var(--ink); color: var(--white); position: sticky; top: 0; z-index: 100; }
-  .header-top { padding: 0; display: flex; align-items: center; justify-content: space-between; height: 80px; transition: height 0.28s ease, opacity 0.28s ease, padding 0.28s ease; overflow: hidden; }
+  .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+  .header-top { padding: 0; display: flex; align-items: center; justify-content: space-between; height: 80px; transition: height 0.28s ease, opacity 0.28s ease; overflow: hidden; }
   .header-brand { display: flex; align-items: baseline; cursor: pointer; flex: 1; }
   .header-brand .title { font-weight: 700; font-size: 32px; color: var(--white); letter-spacing: -0.6px; }
   .title-sep { display: inline; }
@@ -28,45 +29,62 @@
   .header-meta .sep { margin: 0 8px; }
   .header-about-btn { font-size: 13px; color: #7A7570; letter-spacing: 0.5px; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.15s; white-space: nowrap; }
   .header-about-btn:hover { color: #B0A8A0; }
-  .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+  header.scrolled .header-top { height: 0 !important; opacity: 0; pointer-events: none; overflow: hidden; }
 
-  /* Nav */
+  /* DESKTOP NAV */
   .header-nav { display: flex; padding: 0; height: 36px; align-items: stretch; gap: 0; overflow-x: auto; scrollbar-width: none; }
   .header-nav::-webkit-scrollbar { display: none; }
-  .nav-link { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: #7A7570; text-transform: uppercase; padding: 0 14px; display: flex; align-items: center; cursor: pointer; border-radius: 0; transition: color 0.15s, background 0.15s; white-space: nowrap; flex-shrink: 0; }
+  .nav-link { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: #7A7570; text-transform: uppercase; padding: 0 14px; display: flex; align-items: center; cursor: pointer; transition: color 0.15s, background 0.15s; white-space: nowrap; flex-shrink: 0; }
   .nav-link:hover { color: var(--white); background: rgba(255,255,255,0.07); }
   .nav-link.active { color: var(--white); background: var(--accent); }
-  header.scrolled .header-top { height: 0 !important; opacity: 0; pointer-events: none; padding-top: 0; padding-bottom: 0; overflow: hidden; }
+
+  /* HAMBURGER */
+  .hamburger { display: none; background: none; border: none; color: var(--white); font-size: 22px; cursor: pointer; padding: 0; line-height: 1; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0; }
+
+  /* MOBILE NAV PANEL */
+  .mobile-nav-panel { display: none; position: fixed; inset: 0; background: var(--ink); z-index: 300; flex-direction: column; padding: 0; overflow-y: auto; }
+  .mobile-nav-panel.open { display: flex; }
+  .mobile-nav-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.25rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .mobile-nav-title { font-size: 13px; color: #5A5550; letter-spacing: 0.5px; }
+  .mobile-nav-close { background: none; border: none; color: #7A7570; font-size: 22px; cursor: pointer; padding: 0; line-height: 1; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+  .mobile-nav-close:hover { color: var(--white); }
+  .mobile-nav-links { display: flex; flex-direction: column; padding: 0.5rem 0; flex: 1; }
+  .mobile-nav-links .nav-link { font-size: 16px; letter-spacing: 0.5px; padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.05); height: auto; }
+  .mobile-nav-links .nav-link.active { background: var(--accent); color: var(--white); }
+  .mobile-nav-about { padding: 1.25rem; border-top: 1px solid rgba(255,255,255,0.07); margin-top: auto; }
+  .mobile-nav-about button { background: none; border: 1px solid rgba(255,255,255,0.15); color: #7A7570; font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: 0.5px; padding: 0.75rem 1rem; width: 100%; cursor: pointer; border-radius: 4px; text-align: left; transition: color 0.15s, border-color 0.15s; }
+  .mobile-nav-about button:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
 
   /* LAYOUT */
   .page-wrap { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
+  /* MOBILE STYLES */
   @media (max-width: 620px) {
-    .filter-wrap { display: none; }
-    #f-sort { display: none; }
-    .search-wrap { min-width: unset; }
-    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .topic-toggle { font-size: 11px; padding: 6px 10px; }
-    .topics-filter-row { gap: 6px; }
-    .topic-def-grid { grid-template-columns: 1fr; }
-    .page-wrap { padding: 1.5rem 1rem 3rem; }
-    .header-top { padding: 12px 1rem; height: auto; min-height: 64px; }
+    .header-inner { padding: 0 1rem; }
+    .header-top { padding: 12px 0; height: auto; min-height: 64px; transition: height 0.2s ease, opacity 0.2s ease; }
     .header-brand .title { font-size: 22px; line-height: 1.05; letter-spacing: -0.4px; }
     .title-sep { display: none; }
     .title-line { display: block; }
-    .header-right { flex-direction: row; align-items: center; gap: 6px; }
-    .header-meta { font-size: 13px; letter-spacing: 0.3px; }
+    .header-right { gap: 8px; }
+    .header-meta { font-size: 12px; letter-spacing: 0.2px; }
+    .header-meta-text { display: none; }
     .header-about-btn { display: none; }
-    .header-inner { padding: 0 1rem; }
-    .header-nav { padding: 0; height: 38px; }
-    .nav-link { padding: 0 12px; font-size: 11px; letter-spacing: 0.4px; }
-    .header-nav { justify-content: space-between; }
-    footer { padding: 1.25rem 1rem; }
+    .header-nav { display: none; }
+    .hamburger { display: flex; }
+    header.scrolled .header-top { height: 0 !important; min-height: 0 !important; opacity: 0; }
+    .page-wrap { padding: 1.5rem 1rem 3rem; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .filter-wrap { display: none; }
+    #f-sort { display: none; }
+    .search-wrap { min-width: unset; }
+    .topic-toggle { font-size: 11px; padding: 6px 10px; }
+    .topics-filter-row { gap: 6px; }
+    .topic-def-grid { grid-template-columns: 1fr; }
     .detail-name { font-size: 24px; }
     .category-title { font-size: 28px; }
-    .header-top { transition: height 0.2s ease, opacity 0.2s ease; }
-    .header-meta-text { display: none; }
-    header.scrolled .header-top { height: 0 !important; min-height: 0 !important; }
+    footer { padding: 1.25rem 1rem; }
+    .card-name { font-size: 11px; }
+    .card-sub { font-size: 10px; }
   }
 
   @media (min-width: 621px) and (max-width: 820px) {
@@ -78,8 +96,8 @@
   }
 
   /* CONTROLS */
-  .controls-bar { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; padding-bottom: 1.25rem; }
-  .search-wrap { position: relative; flex: 1; .controls-barmin-width: 200px; }
+  .controls-bar { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
   .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-light); pointer-events: none; font-size: 13px; }
   .search-input { width: 100%; padding: 8px 12px 8px 32px; border: 1px solid var(--border); border-radius: 6px; background: var(--white); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--ink); outline: none; transition: border-color 0.15s; }
   .search-input:focus { border-color: var(--ink-mid); }
@@ -127,7 +145,7 @@
   @media (max-width: 820px) { .detail-layout { grid-template-columns: 1fr; gap: 1.5rem; } .detail-image-wrap { position: static !important; } }
   .detail-image-wrap { position: sticky; top: 52px; }
   .detail-img-canvas-wrap { width: 100%; aspect-ratio: 3/4; border-radius: 4px; border: 1px solid var(--border); background: var(--cream); overflow: hidden; }
- .detail-img-canvas-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .detail-img-canvas-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .detail-image-placeholder { width: 100%; aspect-ratio: 3/4; border-radius: 4px; border: 1px solid var(--border); background: var(--cream); display: flex; align-items: center; justify-content: center; }
   .detail-image-placeholder svg { width: 56px; height: 56px; opacity: 0.15; }
   .detail-object-id { font-size: 10px; color: var(--ink-light); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; font-weight: 700; }
@@ -162,17 +180,17 @@
   .era-header .era-name { font-weight: 800; font-size: 52px; line-height: 1; color: var(--ink); }
   .era-header .era-dates { font-weight: 700; font-size: 20px; color: var(--ink-light); }
 
-  /* ERA DETAIL PAGE — bigger borderless image, text beside it */
+  /* ERA DETAIL PAGE */
   .era-detail-layout { display: flex; align-items: center; gap: 2.5rem; margin-bottom: 2rem; }
   .era-detail-image { width: 225px; height: 225px; object-fit: cover; border-radius: 8px; flex-shrink: 0; background: var(--cream); display: block; }
   .era-detail-image-placeholder { width: 225px; height: 225px; border-radius: 8px; background: var(--cream); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .era-detail-image-placeholder svg { width: 56px; height: 56px; opacity: 0.15; }
   .era-detail-text { flex: 1; min-width: 0; }
   .era-detail-name { font-weight: 800; font-size: 40px; line-height: 1.05; color: var(--ink); margin-bottom: 8px; }
-  .era-detail-dates { font-weight: 700; font-size: 16px; color: var(--accent); margin-bottom: 1.25rem; }
+  .era-detail-dates { font-weight: 700; font-size: 16px; color: var(--ink-light); margin-bottom: 1.25rem; }
   @media (max-width: 620px) {
     .era-detail-layout { flex-direction: column; align-items: flex-start; }
-    .era-detail-image, .era-detail-image-placeholder { width: 100%; height: 150px; }
+    .era-detail-image, .era-detail-image-placeholder { width: 100%; height: 160px; }
   }
 
   /* INDEX PAGES */
@@ -185,7 +203,7 @@
   .index-card-name { font-weight: 700; font-size: 13px; line-height: 1.2; }
   .index-card-count { font-size: 11px; color: var(--ink-light); margin-top: 2px; }
 
-  /* ERAS INDEX — stacked rows, newest first */
+  /* ERAS INDEX */
   .era-list { display: flex; flex-direction: column; gap: 14px; }
   .era-index-row { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; display: flex; align-items: center; gap: 1.5rem; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; }
   .era-index-row:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,24,20,0.06); border-color: #C0B8B0; }
@@ -203,6 +221,7 @@
     .era-index-row { flex-direction: column; align-items: flex-start; }
     .era-index-img-wrap { width: 100%; height: 160px; }
   }
+
   .page-title { font-weight: 800; font-size: 28px; margin-bottom: 0.75rem; padding-bottom: 0; border-bottom: none; text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* TOPICS PAGE */
@@ -214,7 +233,7 @@
   .topic-toggle:hover { border-color: var(--ink); color: var(--ink); }
   .topic-toggle.selected { background: var(--accent); color: var(--white); border-color: var(--accent); }
   .topic-toggle .t-count { font-size: 10px; font-weight: 600; opacity: 0.7; margin-left: 4px; }
-  .topics-results-info { font-size: 12px; color: var(--ink-light); margin: 1.25rem 0 1.25rem; min-height: 18px; }
+  .topics-results-info { font-size: 12px; color: var(--ink-light); margin: 1.25rem 0; min-height: 18px; }
   .topics-clear { font-size: 11px; font-weight: 700; color: var(--accent); cursor: pointer; margin-left: 8px; }
   .topics-clear:hover { text-decoration: underline; }
   .topic-def-section-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-light); margin: 2rem 0 0.75rem; }
@@ -276,6 +295,25 @@
 </head>
 <body>
 
+<!-- Mobile nav panel -->
+<div class="mobile-nav-panel" id="mobile-nav-panel">
+  <div class="mobile-nav-header">
+    <span class="mobile-nav-title">Design Drawing Collection</span>
+    <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mobile-nav-links">
+    <span class="nav-link" id="mnav-products" onclick="navigate('products');closeMobileNav()">Products</span>
+    <span class="nav-link" id="mnav-brands" onclick="navigate('brands');closeMobileNav()">Brands</span>
+    <span class="nav-link" id="mnav-designers" onclick="navigate('designers');closeMobileNav()">Designers</span>
+    <span class="nav-link" id="mnav-eras" onclick="navigate('eras');closeMobileNav()">Eras</span>
+    <span class="nav-link" id="mnav-topics" onclick="navigate('topics');closeMobileNav()">Topics</span>
+    <span class="nav-link" id="mnav-drawings" onclick="navigate('drawings');closeMobileNav()" style="display:none">Drawings</span>
+  </div>
+  <div class="mobile-nav-about">
+    <button onclick="closeMobileNav();openAbout()">About the Collection</button>
+  </div>
+</div>
+
 <!-- Topic detail panel -->
 <div class="topic-panel" id="topic-panel" onclick="handlePanelClick(event)">
   <div class="topic-panel-inner">
@@ -319,24 +357,24 @@
 
 <header>
   <div class="header-inner">
-  <div class="header-top">
-    <div class="header-brand" onclick="navigate('products')">
-      <span class="title"><span class="title-line">Design</span><span class="title-sep"> </span><span class="title-line">Drawing</span><span class="title-sep"> </span><span class="title-line">Collection</span></span>
+    <div class="header-top">
+      <div class="header-brand" onclick="navigate('products')">
+        <span class="title"><span class="title-line">Design</span><span class="title-sep"> </span><span class="title-line">Drawing</span><span class="title-sep"> </span><span class="title-line">Collection</span></span>
+      </div>
+      <div class="header-right">
+        <span class="header-meta"><span class="header-meta-text">IDE <span class="sep">·</span> TU Delft </span><img src="assets/tudelft_logo.png" alt="TU Delft" style="height:20px;vertical-align:middle;margin-right:8px;opacity:0.8"><span id="header-count">—</span><span class="sep header-meta-text">·</span></span>
+        <button class="header-about-btn" onclick="openAbout()">About</button>
+        <button class="hamburger" onclick="openMobileNav()" aria-label="Menu">☰</button>
+      </div>
     </div>
-    <div class="header-right">
-      <span class="header-meta"><span class="header-meta-text">IDE <span class="sep">·</span> TU Delft </span><img src="assets/tudelft_logo.png" alt="TU Delft" style="height:20px;vertical-align:middle;margin-right:8px;opacity:0.8"><span id="header-count">—</span><span class="sep header-meta-text">·</span></span>
-      <button class="header-about-btn" onclick="openAbout()">About</button>
-    </div>
-  </div>
-  <nav class="header-nav">
-    <span class="nav-link" id="nav-products" onclick="navigate('products')">Products</span>
-    <span class="nav-link" id="nav-brands" onclick="navigate('brands')">Brands</span>
-    <span class="nav-link" id="nav-designers" onclick="navigate('designers')">Designers</span>
-    <span class="nav-link" id="nav-eras" onclick="navigate('eras')">Eras</span>
-    <span class="nav-link" id="nav-topics" onclick="navigate('topics')">Topics</span>
-    <span class="nav-link" id="nav-drawings" onclick="navigate('drawings')" style="display:none">Drawings</span>
-    <span class="nav-link" id="nav-about-mobile" onclick="openAbout()" style="margin-left:auto">About</span>
-      </nav>
+    <nav class="header-nav">
+      <span class="nav-link" id="nav-products" onclick="navigate('products')">Products</span>
+      <span class="nav-link" id="nav-brands" onclick="navigate('brands')">Brands</span>
+      <span class="nav-link" id="nav-designers" onclick="navigate('designers')">Designers</span>
+      <span class="nav-link" id="nav-eras" onclick="navigate('eras')">Eras</span>
+      <span class="nav-link" id="nav-topics" onclick="navigate('topics')">Topics</span>
+      <span class="nav-link" id="nav-drawings" onclick="navigate('drawings')" style="display:none">Drawings</span>
+    </nav>
   </div>
 </header>
 
@@ -346,7 +384,7 @@
   <div id="view-products" style="display:none">
     <div class="page-title">Products</div>
     <div class="intro-banner">
-      <p>A collection of historically relevant product design objects, assembled at TU Delft IDE as reference material for design drawing education. It is currently still being catalogued, and is estimated to span over a thousand pieces in total.  <a onclick="openAbout()">Read more </a></p>
+      <p>A collection of historically relevant product design objects, assembled at TU Delft IDE as reference material for design drawing education. It is currently still being catalogued, and is estimated to span over a thousand pieces in total. <a onclick="openAbout()">Read more</a></p>
     </div>
     <div class="controls-bar">
       <div class="search-wrap">
@@ -426,13 +464,13 @@
   <!-- TOPICS PAGE -->
   <div id="view-topics" style="display:none">
     <div class="page-title">Drawing Topics</div>
-    <p class="topics-intro">Browse the collection by drawing technique. Each product has been tagged based on its geometric and material properties. Select one or more topics to find matching objects. For more information on Delft Design Drawing,     visit <a href="http://www.delftdesigndrawing.com/" target="_blank" style="color:var(--ink);text-decoration:none;font-weight:700;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink)'">www.delftdesigndrawing.com</a>.</p>
+    <p class="topics-intro">Browse the collection by drawing technique. Each product has been tagged based on its geometric and material properties. Select one or more topics to find matching objects. For more information on Delft Design Drawing, visit <a href="http://www.delftdesigndrawing.com/" target="_blank" style="color:var(--ink);text-decoration:none;font-weight:700;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink)'">www.delftdesigndrawing.com</a>.</p>
     <div id="topic-toggles"></div>
     <div class="topics-results-info" id="topics-results-info"></div>
     <div id="topics-grid" class="product-grid"></div>
   </div>
 
-  <!-- DRAWINGS VIEW (hidden until drawings.csv exists) -->
+  <!-- DRAWINGS VIEW -->
   <div id="view-drawings" style="display:none">
     <div class="page-title">Drawings</div>
     <p style="font-size:14px;color:var(--ink-mid);line-height:1.7;max-width:620px;margin-bottom:2rem;">Student drawings from the Design Drawing Collection archive. Each drawing is linked to the object it depicts.</p>
@@ -457,29 +495,22 @@ function safeAttr(s) { return (s||'').replace(/&/g,'&amp;').replace(/'/g,'&#39;'
 function safeJS(s) { return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 
 function parseCSV(text) {
-  // Scans character-by-character instead of splitting on '\n' first, so a
-  // quoted field that itself contains a line break (a multi-line Excel cell)
-  // or a delimiter isn't mistaken for a row boundary.
   const sep = text.slice(0, text.search(/[\r\n]/)).includes(';') ? ';' : ',';
   const rows = [];
   let row = [], field = '', inQ = false;
   for (let i = 0; i < text.length; i++) {
     const c = text[i];
     if (inQ) {
-      if (c === '"') {
-        if (text[i+1] === '"') { field += '"'; i++; }  // escaped "" -> literal "
-        else { inQ = false; }
-      } else field += c;
+      if (c === '"') { if (text[i+1] === '"') { field += '"'; i++; } else { inQ = false; } } else field += c;
     } else {
       if (c === '"') inQ = true;
       else if (c === sep) { row.push(field); field = ''; }
-      else if (c === '\r') { /* ignore, \n below ends the row */ }
+      else if (c === '\r') {}
       else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
       else field += c;
     }
   }
   if (field.length || row.length) { row.push(field); rows.push(row); }
-
   const headers = rows[0].map(h => h.trim());
   return rows.slice(1).map(vals => {
     const obj = {};
@@ -502,7 +533,9 @@ async function loadData() {
     buildFilters();
     document.getElementById('header-count').textContent = allProducts.length + ' objects';
     fetch('drawings.csv', { method: 'HEAD' }).then(r => {
-      if (r.ok) { const el = document.getElementById('nav-drawings'); if (el) el.style.display = 'flex'; }
+      if (r.ok) {
+        ['nav-drawings','mnav-drawings'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display='flex'; });
+      }
     }).catch(() => {});
     routeFromHash();
   } catch(e) {
@@ -538,8 +571,10 @@ function routeFromHash() {
 
 function setNavActive(view) {
   ['products','brands','designers','eras','topics','drawings'].forEach(v => {
-    const el = document.getElementById('nav-' + v);
-    if (el) el.classList.toggle('active', v === view);
+    const d = document.getElementById('nav-' + v);
+    const m = document.getElementById('mnav-' + v);
+    if (d) d.classList.toggle('active', v === view);
+    if (m) m.classList.toggle('active', v === view);
   });
 }
 
@@ -549,6 +584,9 @@ const VIEWS = ['products','detail','category','brands','designers','eras','topic
 function showView(v) {
   VIEWS.forEach(id => { const el = document.getElementById('view-'+id); if(el) el.style.display = id===v ? 'block' : 'none'; });
 }
+
+function openMobileNav() { document.getElementById('mobile-nav-panel').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileNav() { document.getElementById('mobile-nav-panel').classList.remove('open'); document.body.style.overflow = ''; }
 
 function unique(key) { return [...new Set(allProducts.map(p=>p[key]).filter(Boolean))].sort(); }
 function populateSelect(id, key, label) {
@@ -636,7 +674,6 @@ function productCardHTML(p) {
   </div>`;
 }
 
-
 function trackView(id) {
   try { const k='views_'+id; localStorage.setItem(k,(parseInt(localStorage.getItem(k)||'0')+1).toString()); } catch(e) {}
 }
@@ -676,7 +713,7 @@ function appendNextPage() {
   const batch = sortedProducts.slice(displayedCount, displayedCount + PAGE_SIZE);
   if (!batch.length) return;
   const frag = document.createDocumentFragment();
-  batch.forEach(p => { const div=document.createElement('div'); div.innerHTML=productCardHTML(p,'g'); frag.appendChild(div.firstElementChild); });
+  batch.forEach(p => { const div=document.createElement('div'); div.innerHTML=productCardHTML(p); frag.appendChild(div.firstElementChild); });
   c.appendChild(frag);
   displayedCount += batch.length;
   if (displayedCount < sortedProducts.length) {
@@ -699,7 +736,7 @@ function renderDetail(id) {
     `<a onclick="navigate('products')">← Collection</a><span>/</span><span>${p['Product (EN)']}</span>`;
   const imgWrap = document.getElementById('detail-image-wrap');
   if (p['Photo']) {
-   imgWrap.innerHTML = `<div class="detail-img-canvas-wrap"><img src="${safeAttr(p['Photo'])}" alt="${safeAttr(p['Product (EN)'])}" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"></div>`;
+    imgWrap.innerHTML = `<div class="detail-img-canvas-wrap"><img src="${safeAttr(p['Photo'])}" alt="${safeAttr(p['Product (EN)'])}" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"></div>`;
   } else { imgWrap.innerHTML=`<div class="detail-image-placeholder">${PLACEHOLDER_SVG}</div>`; }
 
   const colourVal = [p['Colour'], p['Colour 2']].filter(Boolean).join(' · ') || null;
@@ -740,7 +777,7 @@ function renderDetail(id) {
   const related = allProducts.filter(x=>x['Brand']===p['Brand']&&x['ObjectID']!==p['ObjectID']).slice(0,4);
   const rs = document.getElementById('related-section');
   if (related.length && p['Brand']) {
-    rs.innerHTML = `<div class="related-title">More from ${p['Brand']}</div><div class="product-grid">${related.map(r=>productCardHTML(r,'r')).join('')}</div>`;
+    rs.innerHTML = `<div class="related-title">More from ${p['Brand']}</div><div class="product-grid">${related.map(r=>productCardHTML(r)).join('')}</div>`;
   } else { rs.innerHTML=''; }
 }
 
@@ -760,7 +797,7 @@ function renderCategory(type, name) {
       ${eraImgHTML}
       <div class="era-detail-text">
         <div class="era-detail-name">${name}</div>
-        ${dates?`<div class="era-detail-dates" style="color:var(--ink-light)">${dates}</div>`:''}
+        ${dates?`<div class="era-detail-dates">${dates}</div>`:''}
         ${info.description?`<p class="category-desc" style="margin-bottom:0">${info.description}</p>`:`<p class="category-no-desc" style="margin-bottom:0">No description yet — add one in eras.json</p>`}
       </div>
     </div>`;
@@ -774,7 +811,7 @@ function renderCategory(type, name) {
   const grid = document.getElementById('cat-grid');
   if (!products.length) { grid.innerHTML='<div class="no-results">No products found</div>'; return; }
   grid.innerHTML = `<div style="grid-column:1/-1"><div class="category-section-title">${products.length} object${products.length!==1?'s':''} in collection</div></div>`
-    + products.map(p=>productCardHTML(p,'cat')).join('');
+    + products.map(p=>productCardHTML(p)).join('');
 }
 
 function renderIndex(type) {
@@ -825,65 +862,35 @@ function renderErasIndex() {
 }
 
 const TOPIC_GROUPS = {
-  'Form':                ['Block Shapes', 'Cylindrical Shapes', 'Singular Rounding', 'Multiple Rounding'],
-  'Materialisation':     ['Matt Surfaces', 'Glossy Surfaces', 'Chrome', 'Transparent Materials'],
-  'Communication':       ['Exploded View', 'Cross Sections'],
+  'Form':            ['Block Shapes', 'Cylindrical Shapes', 'Singular Rounding', 'Multiple Rounding'],
+  'Materialisation': ['Matt Surfaces', 'Glossy Surfaces', 'Chrome', 'Transparent Materials'],
+  'Communication':   ['Exploded View', 'Cross Sections'],
 };
 
 const TOPIC_IMAGES = {
-  'Block Shapes':           'photos/topics/Block_Shapes.jpeg',
-  'Cylindrical Shapes':     'photos/topics/Cylindrical_Shapes.jpeg',
-  'Singular Rounding':      'photos/topics/Singular_Roundings.jpeg',
-  'Multiple Rounding':      'photos/topics/Multiple_Roundings.jpeg',
-  'Matt Surfaces':          'photos/topics/Matte_Surfaces.jpeg',
-  'Glossy Surfaces':        'photos/topics/Glossy_Surfaces.jpeg',
-  'Chrome':                 'photos/topics/Chrome.jpeg',
-  'Transparent Materials':  'photos/topics/Transparent_Materials.jpeg',
-  'Exploded View':          'photos/topics/Exploded_View.jpeg',
-  'Cross Sections':         'photos/topics/Cross_Sections.jpeg',
+  'Block Shapes':          'photos/topics/Block_Shapes.jpeg',
+  'Cylindrical Shapes':    'photos/topics/Cylindrical_Shapes.jpeg',
+  'Singular Rounding':     'photos/topics/Singular_Roundings.jpeg',
+  'Multiple Rounding':     'photos/topics/Multiple_Roundings.jpeg',
+  'Matt Surfaces':         'photos/topics/Matte_Surfaces.jpeg',
+  'Glossy Surfaces':       'photos/topics/Glossy_Surfaces.jpeg',
+  'Chrome':                'photos/topics/Chrome.jpeg',
+  'Transparent Materials': 'photos/topics/Transparent_Materials.jpeg',
+  'Exploded View':         'photos/topics/Exploded_View.jpeg',
+  'Cross Sections':        'photos/topics/Cross_Sections.jpeg',
 };
 
 const DRAWING_TOPICS = {
-  'Block Shapes': {
-    short: 'Rectangular/boxy products with little rounding',
-    desc: 'Block-shaped products are ideal for practising two-point perspective. The key challenge is keeping convergence natural — not too steep. Focus on clean parallel lines, smooth shading on flat planes, and a clear distinction between light and shadow faces.'
-  },
-  'Cylindrical Shapes': {
-    short: 'Dominant cylindrical or tubular forms',
-    desc: 'Cylinders require mastering the ellipse: the long axis is always perpendicular to the rotation axis, and ellipses open wider as they move away from eye level. Shading follows the curvature with a smooth gradient, with a narrow highlight strip along the form.'
-  },
-  'Singular Rounding': {
-    short: 'One dominant curved edge or corner radius',
-    desc: 'A single large radius softens a block form into something more refined. The curved corner is part of an ellipse — the key is keeping that radius consistent across all visible corners. Shading transitions smoothly across the curved face, unlike a sharp flat-plane shadow boundary.'
-  },
-  'Multiple Rounding': {
-    short: 'Several different radii on one product',
-    desc: 'Multiple roundings — a large primary radius combined with smaller secondary radii — are found on most real consumer products. Each radius must be constructed separately in perspective. The transitions between radii create subtle shading shifts that give a drawing its three-dimensional quality.'
-  },
-  'Matt Surfaces': {
-    short: 'Low-contrast diffuse materials',
-    desc: 'Matt surfaces — plastics, painted metals, rubber — reflect light diffusely with gentle, low-contrast gradients and no sharp highlights. Colour marker in overlapping strokes, softened with pastel chalk, is the standard approach. Matt objects reveal form most clearly, making them a good starting point for material rendering.'
-  },
-  'Glossy Surfaces': {
-    short: 'High-contrast shiny plastics and lacquered surfaces',
-    desc: 'Glossy surfaces have a compressed tonal range: very bright light zones, a rapid transition to shadow, and dark shadow zones. The defining feature is a sharp specular highlight following the form. Colour saturation peaks in the mid-tones. Confident, decisive marker application is key.'
-  },
-  'Chrome': {
-    short: 'Highly reflective metal surfaces',
-    desc: 'Polished metal acts as a mirror, creating extreme contrast between near-black darks and near-white lights. A typical chrome cylinder shows a dark centre band, bright edge highlights, and a ground-plane reflection near the base. Usually rendered in cool grey markers with a white gel pen for highlights.'
-  },
-  'Transparent Materials': {
-    short: 'Glass or clear plastic components',
-    desc: 'Transparent materials combine transparency, reflection, and refraction. The technique involves drawing visible internal structure, overlaying a controlled surface reflection, and adding a tinted cast shadow. Edges are rendered dark; central faces stay light. Common in packaging, electronics, and glassware.'
-  },
-  'Exploded View': {
-    short: 'Multi-part products showing assembly and disassembly',
-    desc: 'An exploded view separates the components of a product along perspective directions to show how parts fit together. Each component is displaced along the same axis it would move during assembly. The lines connecting parts remain parallel to the perspective direction, making the spatial relationship between components immediately legible.'
-  },
-  'Cross Sections': {
-    short: 'Cut-through views revealing internal structure',
-    desc: 'Cross sections show the internal structure of an object by drawing a plane cutting through the form. The cut face is typically shown with a hatching pattern to distinguish it from visible surfaces. Intersecting guidelines help define where curved or complex forms meet the cutting plane, making this technique essential for communicating wall thickness, internal geometry, and component relationships.'
-  },
+  'Block Shapes': { short: 'Rectangular/boxy products with little rounding', desc: 'Block-shaped products are ideal for practising two-point perspective. The key challenge is keeping convergence natural — not too steep. Focus on clean parallel lines, smooth shading on flat planes, and a clear distinction between light and shadow faces.' },
+  'Cylindrical Shapes': { short: 'Dominant cylindrical or tubular forms', desc: 'Cylinders require mastering the ellipse: the long axis is always perpendicular to the rotation axis, and ellipses open wider as they move away from eye level. Shading follows the curvature with a smooth gradient, with a narrow highlight strip along the form.' },
+  'Singular Rounding': { short: 'One dominant curved edge or corner radius', desc: 'A single large radius softens a block form into something more refined. The curved corner is part of an ellipse — the key is keeping that radius consistent across all visible corners. Shading transitions smoothly across the curved face, unlike a sharp flat-plane shadow boundary.' },
+  'Multiple Rounding': { short: 'Several different radii on one product', desc: 'Multiple roundings — a large primary radius combined with smaller secondary radii — are found on most real consumer products. Each radius must be constructed separately in perspective. The transitions between radii create subtle shading shifts that give a drawing its three-dimensional quality.' },
+  'Matt Surfaces': { short: 'Low-contrast diffuse materials', desc: 'Matt surfaces — plastics, painted metals, rubber — reflect light diffusely with gentle, low-contrast gradients and no sharp highlights. Colour marker in overlapping strokes, softened with pastel chalk, is the standard approach. Matt objects reveal form most clearly, making them a good starting point for material rendering.' },
+  'Glossy Surfaces': { short: 'High-contrast shiny plastics and lacquered surfaces', desc: 'Glossy surfaces have a compressed tonal range: very bright light zones, a rapid transition to shadow, and dark shadow zones. The defining feature is a sharp specular highlight following the form. Colour saturation peaks in the mid-tones. Confident, decisive marker application is key.' },
+  'Chrome': { short: 'Highly reflective metal surfaces', desc: 'Polished metal acts as a mirror, creating extreme contrast between near-black darks and near-white lights. A typical chrome cylinder shows a dark centre band, bright edge highlights, and a ground-plane reflection near the base. Usually rendered in cool grey markers with a white gel pen for highlights.' },
+  'Transparent Materials': { short: 'Glass or clear plastic components', desc: 'Transparent materials combine transparency, reflection, and refraction. The technique involves drawing visible internal structure, overlaying a controlled surface reflection, and adding a tinted cast shadow. Edges are rendered dark; central faces stay light. Common in packaging, electronics, and glassware.' },
+  'Exploded View': { short: 'Multi-part products showing assembly and disassembly', desc: 'An exploded view separates the components of a product along perspective directions to show how parts fit together. Each component is displaced along the same axis it would move during assembly. The lines connecting parts remain parallel to the perspective direction, making the spatial relationship between components immediately legible.' },
+  'Cross Sections': { short: 'Cut-through views revealing internal structure', desc: 'Cross sections show the internal structure of an object by drawing a plane cutting through the form. The cut face is typically shown with a hatching pattern to distinguish it from visible surfaces. Intersecting guidelines help define where curved or complex forms meet the cutting plane, making this technique essential for communicating wall thickness, internal geometry, and component relationships.' },
 };
 
 let selectedTopics = new Set();
@@ -941,7 +948,7 @@ function renderTopicsGrid() {
   const clearLink = `<span class="topics-clear" onclick="selectedTopics.clear();renderTopicsPage()">Clear</span>`;
   infoEl.innerHTML = `<strong>${matching.length}</strong> object${matching.length!==1?'s':''} match ${selected.map(t=>`<em>${t}</em>`).join(' + ')} ${clearLink}`;
   if (!matching.length) { grid.innerHTML='<div class="no-results">No products match all selected topics.</div>'; return; }
-  grid.innerHTML = matching.map(p => productCardHTML(p, 'tp')).join('');
+  grid.innerHTML = matching.map(p => productCardHTML(p)).join('');
 }
 
 const ERA_DATES = {
@@ -949,7 +956,7 @@ const ERA_DATES = {
   'Mid-Century Modern': '1950 – 1970',
   'Late Modern':        '1970 – 1985',
   'Postmodern':         '1985 – 2000',
-  'Digital Era':            '2000 – Present',
+  'Digital Era':        '2000 – Present',
 };
 const ERA_ORDER = ['Digital Era', 'Postmodern', 'Late Modern', 'Mid-Century Modern', 'Pre-1950'];
 
@@ -999,7 +1006,7 @@ function closeAbout() { document.getElementById('about-modal').classList.remove(
 function handleAboutClick(e) { if (e.target===document.getElementById('about-modal')) closeAbout(); }
 
 document.addEventListener('keydown', e => {
-  if (e.key==='Escape') { closeTopicPanel(); closeAbout(); }
+  if (e.key==='Escape') { closeTopicPanel(); closeAbout(); closeMobileNav(); }
   if (e.key==='ArrowRight' && document.getElementById('topic-panel').classList.contains('open')) stepPanel(1);
   if (e.key==='ArrowLeft' && document.getElementById('topic-panel').classList.contains('open')) stepPanel(-1);
 });
