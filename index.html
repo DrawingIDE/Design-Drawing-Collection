@@ -246,9 +246,9 @@
   .topic-def-desc { font-size: 12px; color: var(--ink-mid); line-height: 1.6; }
 
   /* TOPIC PANEL */
-  .topic-panel { display: none; position: fixed; inset: 0; background: rgba(20,18,15,0.92); z-index: 500; align-items: center; justify-content: center; padding: 1.5rem; }
+  .topic-panel { display: none; position: fixed; inset: 0; background: rgba(20,18,15,0.92); z-index: 500; align-items: center; justify-content: center; padding: 0.75rem; }
   .topic-panel.open { display: flex; }
-  .topic-panel-inner { background: var(--white); border-radius: 8px; overflow: hidden; width: 100%; max-width: 1000px; height: 85vh; display: grid; grid-template-columns: 1fr 380px; }
+  .topic-panel-inner { background: var(--white); border-radius: 8px; overflow: hidden; width: 100%; max-width: 1200px; height: 92vh; display: grid; grid-template-columns: 1fr 340px; }
   .topic-panel-img-wrap { overflow: hidden; background: var(--cream); position: relative; height: 100%; }
   .topic-panel-img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .topic-panel-text { padding: 2rem 2rem 1.5rem; overflow-y: auto; display: flex; flex-direction: column; border-left: 1px solid var(--border); }
@@ -304,6 +304,27 @@
   .index-search-input:focus { border-color: var(--ink-mid); }
   .index-search-input::placeholder { color: var(--ink-light); }
   .index-search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-light); pointer-events: none; font-size: 13px; }
+
+  /* TOPIC PICKER */
+  .topic-picker-btn { display: none; }
+  .topic-picker-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 400; }
+  .topic-picker-overlay.open { display: block; }
+  .topic-picker-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 12px 12px 0 0; z-index: 401; padding: 0 0 2rem; max-height: 70dvh; overflow-y: auto; transform: translateY(100%); transition: transform 0.25s ease; }
+  .topic-picker-sheet.open { transform: translateY(0); }
+  .topic-picker-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0.75rem auto 1rem; }
+  .topic-picker-group-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-light); padding: 0.5rem 1.25rem 0.4rem; }
+  .topic-picker-item { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.25rem; cursor: pointer; transition: background 0.12s; border-bottom: 1px solid var(--border); }
+  .topic-picker-item:hover { background: var(--cream); }
+  .topic-picker-item.active { background: var(--accent); }
+  .topic-picker-item-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .topic-picker-item.active .topic-picker-item-name { color: var(--white); }
+  .topic-picker-item-group { font-size: 11px; color: var(--ink-light); }
+  .topic-picker-item.active .topic-picker-item-group { color: rgba(255,255,255,0.7); }
+
+  @media (max-width: 680px) {
+    .topic-picker-btn { display: flex; align-items: center; justify-content: center; gap: 6px; position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--white); border: none; border-radius: 20px; padding: 8px 16px; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer; z-index: 10; white-space: nowrap; }
+    .topic-picker-btn:hover { background: #2E2A26; }
+  }
 </style>
 </head>
 <body>
@@ -337,6 +358,7 @@
       </div>
       <img id="tp-img" src="" alt="">
       <button class="topic-panel-close" onclick="closeTopicPanel()">✕</button>
+      <button class="topic-picker-btn" onclick="openTopicPicker()">☰ All topics</button>
     </div>
     <div class="topic-panel-text">
       <div class="topic-panel-label" id="tp-group"></div>
@@ -954,11 +976,15 @@ function renderTopicsGrid() {
           const t = DRAWING_TOPICS[name];
           const imgSrc = TOPIC_IMAGES[name] || '';
           const imgHTML = imgSrc ? `<img class="topic-def-img" src="${imgSrc}" alt="${name}" onclick="event.stopPropagation();openTopicPanel('${safeJS(name)}')" onerror="this.style.display='none'">` : '';
-          return `<div class="topic-def-card" onclick="toggleTopic('${safeJS(name)}');renderTopicsPage()">
+          return `<div class="topic-def-card">
             ${imgHTML}
             <div class="topic-def-body">
               <div class="topic-def-name">${name}</div>
               <div class="topic-def-desc">${t.desc}</div>
+              <div style="display:flex;gap:8px;margin-top:0.75rem;flex-wrap:wrap;">
+                <button onclick="toggleTopic('${safeJS(name)}');renderTopicsPage()" style="font-family:inherit;font-size:11px;font-weight:700;padding:6px 12px;border-radius:4px;border:1.5px solid var(--border);background:var(--white);color:var(--ink-mid);cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--ink)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--ink-mid)'">Filter</button>
+                <button onclick="event.stopPropagation();openTopicPanel('${safeJS(name)}')" style="font-family:inherit;font-size:11px;font-weight:700;padding:6px 12px;border-radius:4px;border:none;background:var(--ink);color:var(--white);cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='var(--accent)'" onmouseout="this.style.background='var(--ink)'">View examples →</button>
+              </div>
             </div>
           </div>`;
         }).join('')}</div>`).join('')
@@ -1030,12 +1056,47 @@ function closeAbout() { document.getElementById('about-modal').classList.remove(
 function handleAboutClick(e) { if (e.target===document.getElementById('about-modal')) closeAbout(); }
 
 document.addEventListener('keydown', e => {
-  if (e.key==='Escape') { closeTopicPanel(); closeAbout(); closeMobileNav(); }
+  if (e.key==='Escape') { closeTopicPanel(); closeAbout(); closeMobileNav(); closeTopicPicker(); }
   if (e.key==='ArrowRight' && document.getElementById('topic-panel').classList.contains('open')) stepPanel(1);
   if (e.key==='ArrowLeft' && document.getElementById('topic-panel').classList.contains('open')) stepPanel(-1);
 });
 
+function openTopicPicker() {
+  const list = document.getElementById('topic-picker-list');
+  list.innerHTML = Object.entries(TOPIC_GROUPS).map(([groupName, topics]) => `
+    <div class="topic-picker-group-label">${groupName}</div>
+    ${topics.map(name => {
+      const isActive = TOPIC_ORDER[currentTopicIndex] === name;
+      return `<div class="topic-picker-item ${isActive?'active':''}" onclick="pickTopic('${safeJS(name)}')">
+        <span class="topic-picker-item-name">${name}</span>
+      </div>`;
+    }).join('')}
+  `).join('');
+  document.getElementById('topic-picker-overlay').classList.add('open');
+  document.getElementById('topic-picker-sheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTopicPicker() {
+  document.getElementById('topic-picker-overlay').classList.remove('open');
+  document.getElementById('topic-picker-sheet').classList.remove('open');
+}
+
+function pickTopic(name) {
+  closeTopicPicker();
+  const idx = TOPIC_ORDER.indexOf(name);
+  if (idx >= 0) { currentTopicIndex = idx; updateTopicPanel(); }
+}
+
 loadData();
 </script>
+
+  <!-- Topic picker sheet -->
+  <div class="topic-picker-overlay" id="topic-picker-overlay" onclick="closeTopicPicker()"></div>
+  <div class="topic-picker-sheet" id="topic-picker-sheet">
+    <div class="topic-picker-handle"></div>
+    <div id="topic-picker-list"></div>
+  </div>
+
 </body>
 </html>
