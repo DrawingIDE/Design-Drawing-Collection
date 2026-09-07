@@ -637,8 +637,11 @@ function routeFromHash() {
   else if (view === 'topics') { showView('topics'); renderTopicsPage(); }
   else if (view === 'drawings') { showView('drawings'); }
   else { showView('products'); applyFilters(); }
-  window.scrollTo(0,0);
-}
+    requestAnimationFrame(() => {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+  }
 
 function setNavActive(view) {
   ['products','brands','designers','eras','topics','drawings'].forEach(v => {
@@ -1016,9 +1019,15 @@ function renderTopicsGrid() {
 const ERA_DATES = {
   'Pre-1950':           'Before 1950',
   'Mid-Century Modern': '1950 – 1970',
+<<<<<<< HEAD
+  'Late Modern':        '1970 – 1990',
+  'Postmodern':         '1990 – 2000',
+  'Digital Era':        '2000 – Present',
+=======
   'Late Modern':        '1970 – 1985',
   'Postmodern':         '1985 – 2000',
   'Digital Era':        '2000 – Present',
+>>>>>>> acbdac40e657130578b6adba415158100d32880b
 };
 const ERA_ORDER = ['Digital Era', 'Postmodern', 'Late Modern', 'Mid-Century Modern', 'Pre-1950'];
 
