@@ -40,6 +40,8 @@
 
   /* HAMBURGER — mobile only */
   .hamburger { display: none; background: none; border: none; color: var(--white); font-size: 22px; cursor: pointer; padding: 0 10px 0 0; line-height: 1; align-items: center; justify-content: center; height: 36px; flex-shrink: 0; }
+  .mobile-nav-bar-meta { display: none; }
+  #nav-hamburger { display: none; }
 
   /* MOBILE NAV PANEL */
   .mobile-nav-panel { display: none; position: fixed; inset: 0; background: var(--ink); z-index: 300; flex-direction: column; padding: 0; overflow-y: auto; }
@@ -69,8 +71,10 @@
     .header-meta { font-size: 12px; letter-spacing: 0.2px; }
     .header-meta-text { display: none; }
     .header-about-btn { display: none; }
-    .header-nav { display: none; }
+    .header-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; }
+    .header-nav .nav-link { display: none; }
     .hamburger { display: flex; }
+    .mobile-nav-bar-meta { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5A5550; }
     header.scrolled .header-top { height: 0 !important; min-height: 0 !important; opacity: 0; }
     .page-wrap { padding: 1.5rem 1rem 3rem; }
     .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -419,6 +423,8 @@
       </div>
     </div>
     <nav class="header-nav">
+      <button class="hamburger" onclick="openMobileNav()" aria-label="Menu" id="nav-hamburger">☰</button>
+      <span class="mobile-nav-bar-meta"><img src="assets/tudelft_logo.png" alt="TU Delft" style="height:16px;opacity:0.6;vertical-align:middle"> <span id="nav-count"></span></span>
       <span class="nav-link" id="nav-products" onclick="navigate('products')">Products</span>
       <span class="nav-link" id="nav-brands" onclick="navigate('brands')">Brands</span>
       <span class="nav-link" id="nav-designers" onclick="navigate('designers')">Designers</span>
@@ -585,6 +591,7 @@ async function loadData() {
     ]);
     buildFilters();
     document.getElementById('header-count').textContent = allProducts.length + ' objects';
+    const nc = document.getElementById('nav-count'); if (nc) nc.textContent = allProducts.length + ' objects';
     fetch('drawings.csv', { method: 'HEAD' }).then(r => {
       if (r.ok) {
         ['nav-drawings','mnav-drawings'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display='flex'; });
