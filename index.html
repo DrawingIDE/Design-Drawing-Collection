@@ -4,13 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Design Drawing Collection — TU Delft</title>
-<meta name="description" content="A collection of historically relevant product design objects, assembled at TU Delft IDE as reference material for design drawing education.">
-<meta property="og:title" content="Design Drawing Collection — TU Delft">
-<meta property="og:description" content="A collection of historically relevant product design objects, assembled at TU Delft IDE as reference material for design drawing education.">
-<meta property="og:image" content="https://drawingide.github.io/Design-Drawing-Collection/assets/preview.jpg">
-<meta property="og:url" content="https://drawingide.github.io/Design-Drawing-Collection/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/tudelft_logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,10 +30,6 @@
   .header-about-btn { font-size: 13px; color: #7A7570; letter-spacing: 0.5px; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; transition: color 0.15s; white-space: nowrap; }
   .header-about-btn:hover { color: #B0A8A0; }
   header.scrolled .header-top { height: 0 !important; opacity: 0; pointer-events: none; overflow: hidden; }
-  @media (max-width: 620px) {
-    header.scrolled { transform: translateY(-100%); transition: transform 0.25s ease; }
-    header { transition: transform 0.25s ease; }
-  }
 
   /* DESKTOP NAV */
   .header-nav { display: flex; padding: 0; height: 36px; align-items: center; gap: 0; overflow-x: auto; scrollbar-width: none; }
@@ -83,7 +72,13 @@
     .header-meta-text { display: none; }
     .header-about-btn { display: none; }
     .hamburger { display: flex; }
-    .header-nav { display: none; }
+    header.scrolled .header-top { height: 0 !important; min-height: 0 !important; opacity: 0; }
+    .header-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; height: 40px; }
+    .header-nav .nav-link { display: none; }
+    #nav-hamburger { display: flex; }
+    .mobile-nav-bar-meta { display: none; }
+    header.scrolled .mobile-nav-bar-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #5A5550; }
+    header.scrolled #nav-hamburger { display: flex; }
     .page-wrap { padding: 1.5rem 1rem 3rem; }
     .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .filter-wrap { display: none !important; }
@@ -637,11 +632,11 @@ function routeFromHash() {
   else if (view === 'topics') { showView('topics'); renderTopicsPage(); }
   else if (view === 'drawings') { showView('drawings'); }
   else { showView('products'); applyFilters(); }
-    requestAnimationFrame(() => {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    });
-  }
+  requestAnimationFrame(() => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+}
 
 function setNavActive(view) {
   ['products','brands','designers','eras','topics','drawings'].forEach(v => {
@@ -1019,15 +1014,9 @@ function renderTopicsGrid() {
 const ERA_DATES = {
   'Pre-1950':           'Before 1950',
   'Mid-Century Modern': '1950 – 1970',
-<<<<<<< HEAD
-  'Late Modern':        '1970 – 1990',
-  'Postmodern':         '1990 – 2000',
-  'Digital Era':        '2000 – Present',
-=======
   'Late Modern':        '1970 – 1985',
   'Postmodern':         '1985 – 2000',
   'Digital Era':        '2000 – Present',
->>>>>>> acbdac40e657130578b6adba415158100d32880b
 };
 const ERA_ORDER = ['Digital Era', 'Postmodern', 'Late Modern', 'Mid-Century Modern', 'Pre-1950'];
 
