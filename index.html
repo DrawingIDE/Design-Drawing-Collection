@@ -632,11 +632,12 @@ function routeFromHash() {
   else if (view === 'topics') { showView('topics'); renderTopicsPage(); }
   else if (view === 'drawings') { showView('drawings'); }
   else { showView('products'); applyFilters(); }
-  requestAnimationFrame(() => {
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  });
-}
+   setTimeout(() => {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 100);
+  }
 
 function setNavActive(view) {
   ['products','brands','designers','eras','topics','drawings'].forEach(v => {
