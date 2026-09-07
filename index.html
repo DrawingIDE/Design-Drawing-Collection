@@ -57,49 +57,44 @@
   .mobile-nav-about button { background: none; border: 1px solid rgba(255,255,255,0.15); color: #7A7570; font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: 0.5px; padding: 0.75rem 1rem; width: 100%; cursor: pointer; border-radius: 4px; text-align: left; transition: color 0.15s, border-color 0.15s; }
   .mobile-nav-about button:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
 
-  /* LAYOUT */
-  .page-wrap { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+/* LAYOUT */
+.page-wrap { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
-  /* MOBILE STYLES */
-  @media (max-width: 620px) {
-    .header-inner { padding: 0 1rem; }
-    .header-top { padding: 12px 0; height: auto; min-height: 64px; transition: height 0.2s ease, opacity 0.2s ease; }
-    .header-brand .title { font-size: 22px; line-height: 1.05; letter-spacing: -0.4px; }
-    .title-sep { display: none; }
-    .title-line { display: block; }
-    .header-right { display: flex; align-items: center; gap: 8px; }
-    .header-meta { font-size: 12px; letter-spacing: 0.2px; }
-    .header-meta-text { display: none; }
-    .header-about-btn { display: none; }
-    .hamburger { display: flex; }
-    header.scrolled .header-top { height: 0 !important; min-height: 0 !important; opacity: 0; }
-    .header-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; height: 40px; }
-    .header-nav .nav-link { display: none; }
-    #nav-hamburger { display: flex; }
-    .mobile-nav-bar-meta { display: none; }
-    header.scrolled .mobile-nav-bar-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #5A5550; }
-    header.scrolled #nav-hamburger { display: flex; }
-    .page-wrap { padding: 1.5rem 1rem 3rem; }
-    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .filter-wrap { display: none !important; }
-    #f-sort { display: none !important; }
-    .search-wrap { min-width: unset; }
-    .topic-toggle { font-size: 11px; padding: 6px 10px; }
-    .topics-filter-row { gap: 6px; }
-    .topic-def-grid { grid-template-columns: 1fr; }
-    .detail-name { font-size: 24px; }
-    .category-title { font-size: 28px; }
-    footer { padding: 1.25rem 1rem; }
-    .card-name { font-size: 11px; }
-    .card-sub { font-size: 10px; }
-  }
+/* MOBILE STYLES */
+@media (max-width: 620px) {
+  .header-inner { padding: 0 1rem; }
+  .header-top { padding: 12px 0; height: auto; min-height: 64px; transition: height 0.2s ease, opacity 0.2s ease; }
+  .header-brand .title { font-size: 22px; line-height: 1.05; letter-spacing: -0.4px; }
+  .title-sep { display: none; }
+  .title-line { display: block; }
+  .header-right { display: flex; align-items: center; gap: 8px; }
+  .header-meta { font-size: 12px; letter-spacing: 0.2px; }
+  .header-meta-text { display: none; }
+  .header-about-btn { display: none; }
+  .hamburger { display: flex; }
+  .header-nav { display: none !important; }
+  header.scrolled .header-top { height: 0 !important; min-height: 0 !important; opacity: 0; }
+  .page-wrap { padding: 1.5rem 1rem 3rem; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .filter-wrap { display: none !important; }
+  #f-sort { display: none !important; }
+  .search-wrap { min-width: unset; }
+  .topic-toggle { font-size: 11px; padding: 6px 10px; }
+  .topics-filter-row { gap: 6px; }
+  .topic-def-grid { grid-template-columns: 1fr; }
+  .detail-name { font-size: 24px; }
+  .category-title { font-size: 28px; }
+  footer { padding: 1.25rem 1rem; }
+  .card-name { font-size: 11px; }
+  .card-sub { font-size: 10px; }
+}
 
-  @media (min-width: 621px) and (max-width: 820px) {
-    .page-wrap { padding: 1.5rem 1.25rem 3rem; }
-    .header-top { height: 56px; }
-    .header-brand .title { font-size: 24px; }
-    .nav-link { padding: 0 12px; font-size: 10px; }
-  }
+@media (min-width: 621px) and (max-width: 820px) {
+  .page-wrap { padding: 1.5rem 1.25rem 3rem; }
+  .header-top { height: 56px; }
+  .header-brand .title { font-size: 24px; }
+  .nav-link { padding: 0 12px; font-size: 10px; }
+}
 
   /* CONTROLS */
   .controls-bar { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
