@@ -67,16 +67,16 @@
     .header-brand .title { font-size: 22px; line-height: 1.05; letter-spacing: -0.4px; }
     .title-sep { display: none; }
     .title-line { display: block; }
-    .header-right { gap: 8px; }
+    .header-right { display: flex; align-items: center; gap: 8px; }
     .header-meta { font-size: 12px; letter-spacing: 0.2px; }
     .header-meta-text { display: none; }
     .header-about-btn { display: none; }
-    .header-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; }
-    .header-nav .nav-link { display: none; }
     .hamburger { display: flex; }
-    .mobile-nav-bar-meta { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5A5550; }
-    .header-right { display: none; }
     header.scrolled .header-top { height: 0 !important; min-height: 0 !important; opacity: 0; }
+    .header-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; height: 40px; }
+    .header-nav .nav-link { display: none; }
+    #nav-hamburger { display: flex; }
+    .mobile-nav-bar-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #5A5550; margin-left: auto; }
     .page-wrap { padding: 1.5rem 1rem 3rem; }
     .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .filter-wrap { display: none !important; }
