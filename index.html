@@ -12,6 +12,7 @@
   :root {
     --cream: #f1f1f1; --ink: #1A1814; --ink-mid: #5d5d5d; --ink-light: #b0b0b0;
     --border: #e4e4e4; --accent: #019CE3; --accent-light: #ffffff; --white: #FFFFFF;
+    --hazard: #d32f2f; --hazard-bg: #fdecea; --hazard-text: #7a1f1a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -87,6 +88,7 @@
   footer { padding: 1.25rem 1rem; }
   .card-name { font-size: 11px; }
   .card-sub { font-size: 10px; }
+  .hazard-filter-toggle { font-size: 12px; }
 }
 
 @media (min-width: 621px) and (max-width: 820px) {
@@ -113,8 +115,22 @@
   .clear-all-btn:hover { background: var(--white); border-color: var(--ink-mid); color: var(--ink); }
   .active-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; min-height: 0; }
   .chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 4px 8px 4px 10px; background: var(--accent-light); color: var(--accent); border-radius: 4px; border: 1px solid rgba(1,156,227,0.25); }
+  .chip.chip-hazard { background: var(--hazard-bg); color: var(--hazard); border-color: rgba(211,47,47,0.3); }
+  .chip.chip-hazard .chip-x { color: var(--hazard); }
   .chip-x { background: none; border: none; cursor: pointer; color: var(--accent); font-size: 13px; font-weight: 700; line-height: 1; padding: 0 2px; }
   .result-count { font-size: 12px; color: var(--ink-light); margin-bottom: 0.5rem; }
+
+  /* HAZARD FILTER TOGGLE */
+  .hazard-filter-toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--ink-mid); padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--white); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+  .hazard-filter-toggle:hover { border-color: var(--hazard); }
+  .hazard-filter-toggle.active { border-color: var(--hazard); background: var(--hazard-bg); color: var(--hazard-text); }
+  .hazard-filter-toggle input { accent-color: var(--hazard); cursor: pointer; }
+
+  /* HAZARD BADGE (on product cards) */
+  .hazard-badge { position: absolute; top: 8px; left: 8px; background: var(--hazard); color: #fff; font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 4px; letter-spacing: 0.3px; z-index: 2; display: inline-flex; align-items: center; gap: 3px; box-shadow: 0 1px 4px rgba(0,0,0,0.25); }
+
+  /* HAZARD WARNING (on detail page) */
+  .hazard-warning { display: flex; align-items: flex-start; gap: 8px; background: var(--hazard-bg); border: 1px solid var(--hazard); color: var(--hazard-text); font-size: 13px; font-weight: 600; padding: 10px 14px; border-radius: 6px; margin: 0.75rem 0 1.25rem; line-height: 1.5; }
 
   /* INTRO BANNER */
   .intro-banner { margin-bottom: 1.5rem; padding-bottom: 0.5rem; }
@@ -398,6 +414,7 @@
       <p>In addition, the collection provides valuable knowledge and insights into the history of twentieth-century product design, as well as the evolution of industrial manufacturing during that period. Today, the collection is estimated to comprise over a thousand objects.</p>
       <p>Beyond its role in design drawing education, the design drawing staff aims to make the collection accessible to all members of the community and to visitors. The Heritage Project, sponsored by Delft University of Technology, has enabled the professional documentation and archiving of the objects. Continuous efforts by staff and teaching assistants have resulted in a clear and accessible catalogue containing object descriptions and photographs.</p>
       <p>This website is part of those efforts: a digital archive that makes the collection searchable and accessible, while linking each object to the drawing skills it was originally intended to teach.</p>
+      <p><strong>A note on hazard flags:</strong> a small number of objects in the physical collection are flagged for hazardous materials (for example asbestos in older appliance insulation) and should not be handled outside supervised conditions. These flags describe physical handling restrictions within the managed collection; they are not a general safety notice about the objects pictured.</p>
     </div>
     <div class="about-credits">
       <h3>Student Assistants</h3>
@@ -460,6 +477,10 @@
         <select class="filter-select" id="f-country" onchange="applyFilters()"><option value="">All countries</option></select>
         <button class="filter-clear-x" onclick="clearOne('country')" title="Clear">✕</button>
       </div>
+      <label class="hazard-filter-toggle" id="wrap-hazard">
+        <input type="checkbox" id="f-hazard" onchange="applyFilters()">
+        ⚠ Hazard only
+      </label>
       <select class="filter-select" id="f-sort" onchange="renderGrid()" style="border-color:var(--border);min-width:130px">
         <option value="random">Random</option>
         <option value="name">Name A–Z</option>
@@ -662,6 +683,13 @@ function buildFilters() {
   populateSelect('f-era','Era','eras');
   populateSelect('f-country','Country','countries');
 }
+
+/* ---- Hazard helper ---- */
+function getHazardFlag(p) {
+  const raw = (p['Hazard'] || '').trim();
+  return raw; // e.g. "Asbest" or empty
+}
+
 function getF() {
   return {
     search: document.getElementById('search').value.toLowerCase().trim(),
@@ -669,11 +697,12 @@ function getF() {
     brand: document.getElementById('f-brand').value,
     era: document.getElementById('f-era').value,
     country: document.getElementById('f-country').value,
+    hazardOnly: document.getElementById('f-hazard').checked,
   };
 }
 function applyFilters() {
   const f = getF();
-  const hasAny = f.search||f.designer||f.brand||f.era||f.country;
+  const hasAny = f.search||f.designer||f.brand||f.era||f.country||f.hazardOnly;
   document.getElementById('clear-btn').style.display = hasAny ? 'block' : 'none';
   [['designer','wrap-designer'],['brand','wrap-brand'],['era','wrap-era'],['country','wrap-country']].forEach(([k,wid])=>{
     const sel = document.getElementById('f-'+k);
@@ -681,6 +710,7 @@ function applyFilters() {
     sel.classList.toggle('active', !!sel.value);
     wrap.classList.toggle('has-value', !!sel.value);
   });
+  document.getElementById('wrap-hazard').classList.toggle('active', f.hazardOnly);
   filteredProducts = allProducts.filter(p => {
     if (f.search) {
       const topics = getProductTopics(p).join(' ').toLowerCase();
@@ -691,6 +721,7 @@ function applyFilters() {
     if (f.brand && p['Brand']!==f.brand) return false;
     if (f.era && p['Era']!==f.era) return false;
     if (f.country && p['Country']!==f.country) return false;
+    if (f.hazardOnly && !getHazardFlag(p)) return false;
     return true;
   });
   renderGrid();
@@ -700,6 +731,7 @@ function clearOne(key) { document.getElementById('f-'+key).value = ''; applyFilt
 function clearFilters() {
   document.getElementById('search').value = '';
   ['designer','brand','era','country'].forEach(k => document.getElementById('f-'+k).value='');
+  document.getElementById('f-hazard').checked = false;
   applyFilters();
 }
 function renderChips(f) {
@@ -708,6 +740,7 @@ function renderChips(f) {
   if (f.brand)    chips.push(`<span class="chip">Brand: ${f.brand}<button class="chip-x" onclick="clearOne('brand')">✕</button></span>`);
   if (f.era)      chips.push(`<span class="chip">Era: ${f.era}<button class="chip-x" onclick="clearOne('era')">✕</button></span>`);
   if (f.country)  chips.push(`<span class="chip">Country: ${f.country}<button class="chip-x" onclick="clearOne('country')">✕</button></span>`);
+  if (f.hazardOnly) chips.push(`<span class="chip chip-hazard">⚠ Hazard only<button class="chip-x" onclick="document.getElementById('f-hazard').checked=false;applyFilters()">✕</button></span>`);
   document.getElementById('active-chips').innerHTML = chips.join('');
 }
 
@@ -720,10 +753,13 @@ function productCardHTML(p) {
   const imgHTML = p['Photo']
     ? `<img src="${safeAttr(p['Photo'])}" alt="${safeAttr(heroTitle)}" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : '';
+  const hazard = getHazardFlag(p);
+  const hazardBadgeHTML = hazard ? `<div class="hazard-badge" title="Contains ${safeAttr(hazard)}">⚠ ${hazard}</div>` : '';
   return `<div class="product-card" onclick="navigate('detail','${safeJS(p['ObjectID'])}')">
     <div class="card-img-wrap">
       ${imgHTML}
       <div class="card-img-fallback" style="${p['Photo']?'display:none':'display:flex'}">${PLACEHOLDER_SVG}</div>
+      ${hazardBadgeHTML}
     </div>
     <div class="card-body">
       <div class="card-id">${p['ObjectID']}</div>
@@ -817,9 +853,16 @@ function renderDetail(id) {
       }).join('')}</div>
     </div>` : '';
 
+  const hazard = getHazardFlag(p);
+  const hazardHTML = hazard ? `
+    <div class="hazard-warning">
+      <span>⚠</span><span><strong>Hazardous material: ${hazard}.</strong> Do not handle or use this object. Contact staff before approaching this item.</span>
+    </div>` : '';
+
   document.getElementById('detail-info').innerHTML = `
     <div class="detail-object-id">${p['ObjectID']}</div>
     <div class="detail-name">${p['Product (EN)']}</div>
+    ${hazardHTML}
     ${p['Model/Type']?`<div class="detail-model">${p['Model/Type']}</div>`:''}
     ${desc?`<p style="font-size:13px;line-height:1.75;color:var(--ink-mid);margin:1rem 0 1.5rem;">${desc}</p>`:''}
     <div class="detail-table">${rowsHtml}</div>
