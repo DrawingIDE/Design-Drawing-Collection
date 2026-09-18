@@ -702,7 +702,7 @@ function applyFilters() {
   filteredProducts = allProducts.filter(p => {
     if (f.search) {
       const topics = getProductTopics(p).join(' ').toLowerCase();
-      const hay = [p['ObjectID'],p['Product (EN)'],p['Designer'],p['Brand'],p['Model/Type'],p['Country'],topics].join(' ').toLowerCase();
+      const hay = [p['ObjectID'],p['Product (EN)'],p['Designer'],p['Brand'],p['Model/Type'],p['Country'],p['Hazard'],topics].join(' ').toLowerCase();
       if (!hay.includes(f.search)) return false;
     }
     if (f.designer && p['Designer']!==f.designer) return false;
